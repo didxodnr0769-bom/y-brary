@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title description">
+  <title id="title">프로젝트 카드 샘플</title>
+  <desc id="description">두 개의 프로젝트 카드를 편집 디자인 형태로 표현한 이미지</desc>
+  <rect width="1200" height="750" fill="#d9ded8"/>
+  <rect x="84" y="78" width="1032" height="594" fill="#f9faf6" stroke="#68736b" stroke-width="3"/>
+  <text x="130" y="145" font-family="monospace" font-size="22" fill="#466052">02 / PROJECT CARD</text>
+  <rect x="130" y="195" width="430" height="280" fill="#315f73"/>
+  <rect x="610" y="195" width="430" height="280" fill="#bd7b58"/>
+  <circle cx="345" cy="335" r="68" fill="#dce8df"/>
+  <rect x="750" y="270" width="150" height="128" fill="#f0d9c7"/>
+  <rect x="130" y="510" width="290" height="19" fill="#20221f"/>
+  <rect x="130" y="550" width="380" height="12" fill="#8a8f87"/>
+  <rect x="610" y="510" width="260" height="19" fill="#20221f"/>
+  <rect x="610" y="550" width="360" height="12" fill="#8a8f87"/>
+</svg>

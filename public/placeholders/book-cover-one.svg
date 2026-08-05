@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="title">
+  <title id="title">책 기록 예시 01 샘플 표지</title>
+  <rect width="800" height="1000" fill="#e6dfd1"/>
+  <rect x="70" y="70" width="660" height="860" fill="#255b4a"/>
+  <text x="120" y="180" font-family="monospace" font-size="26" fill="#dce8df">BOOK / 01</text>
+  <rect x="120" y="270" width="430" height="72" fill="#f4f1e9"/>
+  <rect x="120" y="380" width="520" height="18" fill="#8db9a4"/>
+  <rect x="120" y="425" width="420" height="18" fill="#8db9a4"/>
+  <circle cx="500" cy="700" r="145" fill="#dce8df"/>
+  <rect x="120" y="848" width="210" height="14" fill="#f4f1e9"/>
+</svg>

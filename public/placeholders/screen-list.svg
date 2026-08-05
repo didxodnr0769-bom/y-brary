@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title">
+  <title id="title">프로젝트 목록 화면 샘플</title>
+  <rect width="1200" height="750" fill="#ede9df"/>
+  <rect x="50" y="50" width="1100" height="650" fill="#fffdf7" stroke="#8e897f" stroke-width="3"/>
+  <rect x="50" y="50" width="220" height="650" fill="#1f493d"/>
+  <rect x="100" y="110" width="80" height="80" fill="#f4f1e9"/>
+  <rect x="320" y="112" width="360" height="42" fill="#20221f"/>
+  <rect x="320" y="186" width="770" height="54" fill="#f4f1e9" stroke="#c4bfb3" stroke-width="2"/>
+  <rect x="320" y="288" width="350" height="230" fill="#dce8df"/>
+  <rect x="720" y="288" width="350" height="230" fill="#d8c8b1"/>
+  <rect x="320" y="548" width="240" height="16" fill="#20221f"/>
+  <rect x="720" y="548" width="220" height="16" fill="#20221f"/>
+</svg>

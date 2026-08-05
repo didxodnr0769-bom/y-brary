@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="title">
+  <title id="title">영화 기록 예시 02 샘플 포스터</title>
+  <rect width="800" height="1000" fill="#d8dfe1"/>
+  <rect x="70" y="70" width="660" height="860" fill="#315f73"/>
+  <path d="M70 670 L730 250 L730 930 L70 930 Z" fill="#163645"/>
+  <circle cx="245" cy="300" r="96" fill="#e8d4a2"/>
+  <text x="120" y="760" font-family="monospace" font-size="28" fill="#a9c6d1">FILM / 02</text>
+  <rect x="120" y="812" width="430" height="42" fill="#f4f1e9"/>
+  <rect x="120" y="884" width="520" height="12" fill="#a9c6d1"/>
+</svg>

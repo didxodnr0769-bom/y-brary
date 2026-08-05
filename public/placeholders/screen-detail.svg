@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title">
+  <title id="title">프로젝트 상세 화면 샘플</title>
+  <rect width="1200" height="750" fill="#e1ded6"/>
+  <rect x="60" y="55" width="1080" height="640" fill="#fffdf7" stroke="#8e897f" stroke-width="3"/>
+  <text x="115" y="125" font-family="monospace" font-size="18" fill="#255b4a">PROJECT / DETAIL</text>
+  <rect x="115" y="164" width="510" height="44" fill="#20221f"/>
+  <rect x="115" y="240" width="970" height="350" fill="#255b4a"/>
+  <rect x="180" y="305" width="360" height="220" fill="#dce8df"/>
+  <rect x="585" y="305" width="435" height="22" fill="#8db9a4"/>
+  <rect x="585" y="357" width="360" height="14" fill="#dce8df"/>
+  <rect x="585" y="397" width="400" height="14" fill="#dce8df"/>
+  <rect x="585" y="437" width="330" height="14" fill="#dce8df"/>
+  <rect x="115" y="625" width="420" height="12" fill="#999b94"/>
+</svg>
