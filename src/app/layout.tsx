@@ -1,8 +1,26 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 
 import { AppShell } from "@/components/app-shell";
 
 import "./globals.css";
+
+const maplestory = localFont({
+  src: [
+    {
+      path: "./fonts/maplestory-light.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/maplestory-bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  display: "swap",
+  variable: "--font-maplestory",
+});
 
 const indexingEnabled = process.env.ENABLE_INDEXING === "true";
 
@@ -24,7 +42,7 @@ const themeScript = `(function(){try{var k="ybrary-theme";var t=localStorage.get
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" data-theme="light" suppressHydrationWarning>
+    <html lang="ko" className={maplestory.variable} data-theme="light" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

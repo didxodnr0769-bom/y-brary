@@ -1,7 +1,7 @@
 import type { Route } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
+import { ContentImage } from "@/components/content-image";
 import { formatDate } from "@/lib/content/format";
 import type { Review } from "@/lib/content/schema";
 
@@ -22,7 +22,7 @@ export function ReviewDetail({ review }: { review: Review }) {
       <div className="review-detail-layout">
         <div className="review-cover">
           <div className="detail-hero">
-            <Image src={review.cover.url} alt={review.cover.alt} fill sizes="(max-width: 640px) 90vw, 340px" />
+            <ContentImage src={review.cover.url} alt={review.cover.alt} fill sizes="(max-width: 640px) 90vw, 340px" />
           </div>
         </div>
 

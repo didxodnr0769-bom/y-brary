@@ -1,7 +1,7 @@
 import type { Route } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
+import { ContentImage } from "@/components/content-image";
 import { formatDate } from "@/lib/content/format";
 import type { Review } from "@/lib/content/schema";
 
@@ -18,7 +18,7 @@ export function ReviewCard({ eager = false, review }: { eager?: boolean; review:
     <article className="content-card review-card">
       <Link className="card-link" href={href}>
         <div className="card-media">
-          <Image
+          <ContentImage
             src={review.cover.url}
             alt={review.cover.alt}
             fill

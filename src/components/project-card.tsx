@@ -1,7 +1,7 @@
 import type { Route } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
+import { ContentImage } from "@/components/content-image";
 import { formatDate } from "@/lib/content/format";
 import type { Project } from "@/lib/content/schema";
 
@@ -12,7 +12,7 @@ export function ProjectCard({ eager = false, project }: { eager?: boolean; proje
     <article className="content-card project-card">
       <Link className="card-link" href={href}>
         <div className="card-media">
-          <Image
+          <ContentImage
             src={project.thumbnail.url}
             alt={project.thumbnail.alt}
             fill

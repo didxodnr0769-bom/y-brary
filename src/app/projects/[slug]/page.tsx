@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ContentImage } from "@/components/content-image";
 import { formatDate } from "@/lib/content/format";
 import { getProjectBySlug } from "@/lib/content/repository";
 
@@ -44,7 +44,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       </header>
 
       <div className="detail-hero">
-        <Image src={project.thumbnail.url} alt={project.thumbnail.alt} fill sizes="(max-width: 900px) 100vw, 1040px" />
+        <ContentImage
+          src={project.thumbnail.url}
+          alt={project.thumbnail.alt}
+          fill
+          sizes="(max-width: 900px) 100vw, 1040px"
+        />
       </div>
 
       <div className="detail-copy">
@@ -74,7 +79,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           {project.screenshots.toSorted((a, b) => a.sortOrder - b.sortOrder).map((screenshot) => (
             <figure key={screenshot.id}>
               <div className="screen-frame">
-                <Image src={screenshot.url} alt={screenshot.alt} fill sizes="(max-width: 640px) 100vw, 520px" />
+                <ContentImage
+                  src={screenshot.url}
+                  alt={screenshot.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 520px"
+                />
               </div>
               {screenshot.caption ? <figcaption className="screen-caption">{screenshot.caption}</figcaption> : null}
             </figure>
