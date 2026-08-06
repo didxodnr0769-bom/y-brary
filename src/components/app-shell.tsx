@@ -73,7 +73,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </nav>
 
         <div className="sidebar-footer">
-          <span>Personal archive</span>
           <ThemeToggle />
         </div>
       </aside>

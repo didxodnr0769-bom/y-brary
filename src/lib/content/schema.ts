@@ -16,16 +16,28 @@ export const projectScreenshotSchema = imageAssetSchema.extend({
   sortOrder: z.number().int().min(0),
 });
 
+const projectPeriodSchema = z
+  .object({
+    startedAt: dateSchema,
+    endedAt: dateSchema,
+  })
+  .refine(({ endedAt, startedAt }) => startedAt <= endedAt, {
+    message: "프로젝트 종료일은 시작일보다 빠를 수 없습니다.",
+    path: ["endedAt"],
+  });
+
 export const projectSchema = z.object({
   id: z.string().min(1),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   title: z.string().min(1).max(120),
   summary: z.string().min(1).max(300),
   description: z.string().min(1).max(2000),
-  thumbnail: imageAssetSchema,
-  screenshots: z.array(projectScreenshotSchema).min(1).max(6),
+  thumbnail: imageAssetSchema.nullable(),
+  screenshots: z.array(projectScreenshotSchema).max(6),
   githubUrl: z.url().nullable(),
   liveUrl: z.url().nullable(),
+  tags: z.array(z.string().min(1).max(30)).max(8).default([]),
+  period: projectPeriodSchema.nullable().default(null),
   publishedAt: dateSchema,
   isSample: z.boolean().default(false),
 });

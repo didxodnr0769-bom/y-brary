@@ -29,7 +29,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         count={projects.length}
       />
 
-      <SearchForm action="/" query={query} label="프로젝트 제목 검색" />
+      <SearchForm action="/" query={query} label="프로젝트 제목 또는 태그 검색" />
 
       {projects.length > 0 ? (
         <section className="project-grid" aria-label="프로젝트 목록">
