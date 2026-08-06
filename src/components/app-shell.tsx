@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { CloseIcon, MenuIcon } from "@/components/ui-icons";
 
 const navItems = [
   { href: "/", label: "프로젝트", glyph: "01" },
@@ -39,7 +40,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </span>
           <span className="brand-copy">
             <strong>YBrary</strong>
-            <span>PROJECTS · BOOKS · FILMS</span>
           </span>
         </Link>
 
@@ -49,7 +49,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           aria-label="메뉴 닫기"
           onClick={() => setMenuOpen(false)}
         >
-          ×
+          <CloseIcon />
         </button>
 
         <nav className="primary-nav" aria-label="주요 메뉴">
@@ -93,7 +93,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               aria-controls="primary-navigation"
               onClick={() => setMenuOpen(true)}
             >
-              ≡
+              <MenuIcon />
             </button>
           </div>
         </header>

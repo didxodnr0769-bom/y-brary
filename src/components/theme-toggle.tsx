@@ -2,6 +2,8 @@
 
 import { useLayoutEffect } from "react";
 
+import { ThemeIcon } from "@/components/ui-icons";
+
 const storageKey = "ybrary-theme";
 
 export function ThemeToggle() {
@@ -21,7 +23,7 @@ export function ThemeToggle() {
 
   return (
     <button className="theme-button" type="button" aria-label="색상 테마 전환" onClick={toggleTheme}>
-      <span aria-hidden="true">◐</span>
+      <ThemeIcon />
     </button>
   );
 }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ContentImage } from "@/components/content-image";
+import { ProjectGallery, type ProjectGalleryImage } from "@/components/project-gallery";
 import { formatDate } from "@/lib/content/format";
 import { getProjectBySlug } from "@/lib/content/repository";
 
@@ -19,6 +19,20 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const project = await getProjectBySlug((await params).slug);
   if (!project) notFound();
+  const galleryImages: ProjectGalleryImage[] = [
+    {
+      id: `${project.id}-thumbnail`,
+      url: project.thumbnail.url,
+      alt: project.thumbnail.alt,
+      caption: "대표 이미지",
+    },
+    ...project.screenshots.toSorted((a, b) => a.sortOrder - b.sortOrder).map((screenshot) => ({
+      id: screenshot.id,
+      url: screenshot.url,
+      alt: screenshot.alt,
+      caption: screenshot.caption,
+    })),
+  ];
 
   return (
     <article className="detail-page">
@@ -37,20 +51,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           <span>
             게시일 <strong>{formatDate(project.publishedAt)}</strong>
           </span>
-          <span>
-            스크린샷 <strong>{project.screenshots.length}</strong>
-          </span>
         </div>
       </header>
 
-      <div className="detail-hero">
-        <ContentImage
-          src={project.thumbnail.url}
-          alt={project.thumbnail.alt}
-          fill
-          sizes="(max-width: 900px) 100vw, 1040px"
-        />
-      </div>
+      <ProjectGallery images={galleryImages} />
 
       <div className="detail-copy">
         <p>{project.description}</p>
@@ -69,28 +73,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </div>
         ) : null}
       </div>
-
-      <section className="screenshots-section">
-        <div className="section-heading">
-          <h2>화면</h2>
-          <span>{String(project.screenshots.length).padStart(2, "0")}</span>
-        </div>
-        <div className="screen-grid">
-          {project.screenshots.toSorted((a, b) => a.sortOrder - b.sortOrder).map((screenshot) => (
-            <figure key={screenshot.id}>
-              <div className="screen-frame">
-                <ContentImage
-                  src={screenshot.url}
-                  alt={screenshot.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 520px"
-                />
-              </div>
-              {screenshot.caption ? <figcaption className="screen-caption">{screenshot.caption}</figcaption> : null}
-            </figure>
-          ))}
-        </div>
-      </section>
     </article>
   );
 }
