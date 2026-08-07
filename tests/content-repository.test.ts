@@ -11,12 +11,19 @@ describe("static content repository", () => {
   it("등록된 실제 프로젝트를 최신순 목록에 제공한다", async () => {
     const projects = await listProjects();
 
-    expect(projects.map((project) => project.slug)).toEqual(["major-scale-lab", "ybrary"]);
+    expect(projects.map((project) => project.slug)).toEqual([
+      "color-picker-game",
+      "major-scale-lab",
+      "ybrary",
+    ]);
     expect(projects.every((project) => !project.isSample)).toBe(true);
   });
 
   it("프로젝트 제목을 공백과 대소문자에 관계없이 검색한다", async () => {
     await expect(listProjects("  YBRARY  ")).resolves.toHaveLength(1);
+    await expect(listProjects("color picker")).resolves.toMatchObject([
+      { slug: "color-picker-game" },
+    ]);
     await expect(listProjects("major scale")).resolves.toMatchObject([{ slug: "major-scale-lab" }]);
     await expect(listProjects("없는 프로젝트")).resolves.toEqual([]);
   });
@@ -36,6 +43,13 @@ describe("static content repository", () => {
       title: "Major Scale Lab",
       screenshots: expect.arrayContaining([
         expect.objectContaining({ id: "major-scale-result-detail" }),
+      ]),
+    });
+    await expect(getProjectBySlug("color-picker-game")).resolves.toMatchObject({
+      title: "Color Picker Game",
+      liveUrl: "https://didxodnr0769-bom.github.io/color-picker-game/",
+      screenshots: expect.arrayContaining([
+        expect.objectContaining({ id: "color-picker-game-round-results" }),
       ]),
     });
     await expect(getProjectBySlug("missing-project")).resolves.toBeNull();

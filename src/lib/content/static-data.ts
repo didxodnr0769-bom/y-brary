@@ -2,6 +2,48 @@ import { projectSchema, reviewSchema } from "@/lib/content/schema";
 
 export const projects = projectSchema.array().parse([
   {
+    id: "project-color-picker-game",
+    slug: "color-picker-game",
+    title: "Color Picker Game",
+    summary:
+      "제시된 문제 색과 최대한 비슷한 색을 컬러 피커로 찾아 총 5문제 동안 자신의 색감을 테스트하는 웹 게임입니다.",
+    description:
+      "Color Picker Game은 제시된 문제 색을 보고 컬러 피커를 조작해 최대한 비슷한 색을 찾으며 자신의 색감을 테스트하는 웹사이트입니다.\n\n총 5문제로 구성되며 문제당 제한 시간은 10초입니다. 각 문제에서 목표 색과 사용자가 선택한 색의 유사도에 따라 점수를 부여합니다.\n\n테스트가 끝나면 전체 점수와 문제별 목표 색, 선택 색, 유사도 점수를 확인할 수 있습니다.",
+    thumbnail: {
+      url: "/content/projects/color-picker-game/cover.webp",
+      alt: "Color Picker Game 로고와 눈으로 맞추는 다섯 개의 색 문구, 목표 색·컬러 휠·선택 색 카드가 배치된 시작 화면",
+    },
+    screenshots: [
+      {
+        id: "color-picker-game-picker",
+        url: "/content/projects/color-picker-game/color-picker.webp",
+        alt: "두 번째 문제의 목표 색과 내 선택 색을 비교하며 색상·채도·명도 슬라이더를 조절하는 컬러 피커 화면",
+        caption: "제한 시간 안에 목표 색과 비슷한 색을 찾는 문제 화면",
+        sortOrder: 0,
+      },
+      {
+        id: "color-picker-game-result-summary",
+        url: "/content/projects/color-picker-game/result-summary.webp",
+        alt: "평균 유사도 점수와 총 소요 시간, 평균 응답 시간을 보여주는 Color Picker Game 결과 요약 화면",
+        caption: "5문제의 평균 유사도와 응답 시간을 확인하는 결과 요약",
+        sortOrder: 1,
+      },
+      {
+        id: "color-picker-game-round-results",
+        url: "/content/projects/color-picker-game/round-results.webp",
+        alt: "다섯 문제의 목표 색과 선택 색, HEX 값, 유사도 점수, 응답 시간을 나열한 문제별 결과 화면",
+        caption: "목표 색과 선택 색의 차이를 문제별로 비교하는 상세 결과",
+        sortOrder: 2,
+      },
+    ],
+    githubUrl: "https://github.com/didxodnr0769-bom/color-picker-game",
+    liveUrl: "https://didxodnr0769-bom.github.io/color-picker-game/",
+    tags: [],
+    period: null,
+    publishedAt: "2026-08-06",
+    isSample: false,
+  },
+  {
     id: "project-major-scale-lab",
     slug: "major-scale-lab",
     title: "Major Scale Lab",
