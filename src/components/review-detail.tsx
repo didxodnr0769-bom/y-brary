@@ -40,8 +40,16 @@ export function ReviewDetail({ review }: { review: Review }) {
               </div>
               <div>
                 <dt>{copy.creator}</dt>
-                <dd>{review.creator}</dd>
+                <dd>{review.kind === "book" ? (
+                  <Link className="book-collection-link" to={`/books?${new URLSearchParams({ author: review.creator })}`}>{review.creator}</Link>
+                ) : review.creator}</dd>
               </div>
+              {review.kind === "book" && review.category ? (
+                <div>
+                  <dt>카테고리</dt>
+                  <dd><Link className="book-collection-link" to={`/books?${new URLSearchParams({ category: review.category })}`}>{review.category}</Link></dd>
+                </div>
+              ) : null}
               <div>
                 <dt>{copy.date}</dt>
                 <dd>{formatDate(review.consumedOn)}</dd>

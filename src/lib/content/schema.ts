@@ -60,7 +60,10 @@ const reviewFields = z.object({
 });
 
 export const reviewSchema = z.discriminatedUnion("kind", [
-  reviewFields.extend({ kind: z.literal("book") }),
+  reviewFields.extend({
+    kind: z.literal("book"),
+    category: z.string().trim().min(1).max(30).optional(),
+  }),
   reviewFields.extend({
     kind: z.literal("course"),
     cover: imageAssetSchema.nullable().default(null),

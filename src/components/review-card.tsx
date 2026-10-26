@@ -28,6 +28,7 @@ export function ReviewCard({ eager = false, review }: { eager?: boolean; review:
         <div className="card-body">
           <div className="card-meta-row">
             <span className="kind-badge">{review.isSample ? `Sample ${kindLabel[review.kind]}` : kindLabel[review.kind]}</span>
+            {review.kind === "book" && review.category ? <span className="topic-badge">{review.category}</span> : null}
             <time dateTime={review.consumedOn}>{formatDate(review.consumedOn)}</time>
           </div>
           <h2 className="card-title">{review.title}</h2>

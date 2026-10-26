@@ -17,11 +17,15 @@ export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug) ?? null;
 }
 
-export function listReviews(kind: ReviewKind, query = "") {
+export function listReviews(kind: ReviewKind, query = "", filters: { category?: string; author?: string } = {}) {
   const normalizedQuery = normalizeSearchText(query);
 
   return reviews
     .filter((review) => review.kind === kind && normalizeSearchText(review.title).includes(normalizedQuery))
+    .filter((review) => review.kind !== "book" || (
+      (!filters.category || review.category === filters.category)
+      && (!filters.author || review.creator === filters.author)
+    ))
     .toSorted((a, b) => b.consumedOn.localeCompare(a.consumedOn));
 }
 

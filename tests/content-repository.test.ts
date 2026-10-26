@@ -57,8 +57,10 @@ describe("static content repository", () => {
     await expect(getProjectBySlug("missing-project")).toBeNull();
   });
 
-  it("샘플 책과 강의 기록를 제공하지 않는다", async () => {
-    await expect(listReviews("book")).toEqual([]);
+  it("등록된 실제 책을 제공하고 샘플과 미등록 기록은 제공하지 않는다", async () => {
+    await expect(listReviews("book")).toMatchObject([
+      { slug: "the-sorrows-of-young-werther", isSample: false },
+    ]);
     await expect(listReviews("course")).toEqual([]);
     await expect(getReviewBySlug("book", "book-review-example-one")).toBeNull();
     await expect(getReviewBySlug("course", "missing-course")).toBeNull();
