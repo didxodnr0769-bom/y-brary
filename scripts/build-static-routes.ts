@@ -13,7 +13,7 @@ async function buildStaticRoutes() {
   const dist = new URL("../dist/", import.meta.url);
   const html = await readFile(new URL("index.html", dist), "utf8");
   const paths = [
-    "books", "courses", "notes",
+    "projects", "books", "courses", "notes",
     ...projects.map((project) => `projects/${project.slug}`),
     ...reviews.map((review) => `${review.kind === "book" ? "books" : "courses"}/${review.slug}`),
     ...notes.map((note) => `notes/${note.slug}`),

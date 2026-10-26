@@ -56,6 +56,20 @@ describe("학습 콘텐츠 화면", () => {
     expect(screen.getByRole("img", { name: "아직 이미지가 첨부되지 않았어요." })).toBeTruthy();
   });
 
+  it("책 상세에 독서 시작일, 완독일과 읽은 곳을 구분해서 표시한다", () => {
+    const book = reviewSchema.parse({
+      id: "test-book", kind: "book", slug: "test-book", title: "테스트용 책",
+      creator: "테스트 저자", consumedOn: "2026-10-25", startedOn: "2026-09-25", readingSource: "직접 소장",
+      rating: 4, summary: "감상 요약", body: "감상 본문", cover: { url: "/test-cover.webp", alt: "테스트 표지" },
+      publishedAt: "2026-10-26", isSample: true,
+    });
+    render(<MemoryRouter><ReviewDetail review={book} /></MemoryRouter>);
+    expect(screen.getByText("독서 시작일").nextElementSibling?.textContent).toBe("2026. 09. 25.");
+    expect(screen.getByText("완독일").nextElementSibling?.textContent).toBe("2026. 10. 25.");
+    expect(screen.getByText("읽은 곳").nextElementSibling?.textContent).toBe("직접 소장");
+    expect(screen.queryByText("감상일")).toBeNull();
+  });
+
   it("학습 Markdown의 제목, 강조와 코드 블록을 렌더링한다", () => {
     vi.mocked(getLearningNoteBySlug).mockReturnValue({ ...note, body: "## 타입 확인\n\n**중요한 개념**\n\n```ts\nconst value: number = 1;\n```" });
     render(<MemoryRouter><LearningNoteDetailPage slug={note.slug} /></MemoryRouter>);

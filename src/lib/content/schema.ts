@@ -63,6 +63,11 @@ export const reviewSchema = z.discriminatedUnion("kind", [
   reviewFields.extend({
     kind: z.literal("book"),
     category: z.string().trim().min(1).max(30).optional(),
+    startedOn: dateSchema.nullable().optional(),
+    readingSource: z.string().trim().min(1).max(120).optional(),
+  }).refine(({ startedOn, consumedOn }) => !startedOn || startedOn <= consumedOn, {
+    message: "독서 시작일은 완독일보다 늦을 수 없습니다.",
+    path: ["startedOn"],
   }),
   reviewFields.extend({
     kind: z.literal("course"),

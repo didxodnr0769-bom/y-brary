@@ -20,6 +20,18 @@ describe("React 앱 탐색", () => {
     expect(screen.getByRole("heading", { name: "Color Picker Game" })).toBeTruthy();
     expect(screen.getByRole<HTMLInputElement>("searchbox").value).toBe("color picker");
     fireEvent.click(screen.getByRole("link", { name: "초기화" }));
+    expect(screen.getByRole("heading", { name: "젊은 베르테르의 슬픔" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "프로젝트 헤일메리" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "YBrary" })).toBeTruthy();
+    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(5);
+  });
+
+  it("프로젝트 전용 목록과 검색은 /projects에 유지한다", () => {
+    render(<MemoryRouter initialEntries={["/projects?q=major"]}><App /></MemoryRouter>);
+    expect(document.title).toBe("프로젝트 | YBrary");
+    expect(screen.getByRole("heading", { name: "Major Scale Lab" })).toBeTruthy();
+    expect(screen.queryByRole("heading", { name: "프로젝트 헤일메리" })).toBeNull();
+    fireEvent.click(screen.getByRole("link", { name: "초기화" }));
     expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(3);
   });
 

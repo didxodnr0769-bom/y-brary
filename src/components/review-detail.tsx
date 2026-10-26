@@ -5,7 +5,7 @@ import { formatDate } from "@/lib/content/format";
 import type { Review } from "@/lib/content/schema";
 
 const kindCopy = {
-  book: { label: "책", collection: "/books", creator: "저자", type: "Book", date: "감상일", note: "리뷰" },
+  book: { label: "책", collection: "/books", creator: "저자", type: "Book", date: "완독일", note: "리뷰" },
   course: { label: "강의", collection: "/courses", creator: "강사", type: "Course", date: "수강일", note: "수강 후기" },
 };
 
@@ -50,10 +50,22 @@ export function ReviewDetail({ review }: { review: Review }) {
                   <dd><Link className="book-collection-link" to={`/books?${new URLSearchParams({ category: review.category })}`}>{review.category}</Link></dd>
                 </div>
               ) : null}
+              {review.kind === "book" ? (
+                <div>
+                  <dt>독서 시작일</dt>
+                  <dd>{review.startedOn ? formatDate(review.startedOn) : "미기록"}</dd>
+                </div>
+              ) : null}
               <div>
                 <dt>{copy.date}</dt>
                 <dd>{formatDate(review.consumedOn)}</dd>
               </div>
+              {review.kind === "book" && review.readingSource ? (
+                <div>
+                  <dt>읽은 곳</dt>
+                  <dd>{review.readingSource}</dd>
+                </div>
+              ) : null}
               <div>
                 <dt>별점</dt>
                 <dd className="rating" aria-label={`5점 만점에 ${review.rating}점`}>

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 import { ContentImage } from "@/components/content-image";
-import { formatDateRange } from "@/lib/content/format";
 import type { Project } from "@/lib/content/schema";
 
 export function ProjectCard({ eager = false, project }: { eager?: boolean; project: Project }) {
@@ -20,12 +19,7 @@ export function ProjectCard({ eager = false, project }: { eager?: boolean; proje
           />
         </div>
         <div className="card-body">
-          <div className="card-meta-row">
-            {project.isSample ? <span className="sample-badge">Sample</span> : <span />}
-            {project.period ? (
-              <span>{formatDateRange(project.period.startedAt, project.period.endedAt)}</span>
-            ) : null}
-          </div>
+          {project.isSample ? <div className="card-meta-row"><span className="sample-badge">Sample</span></div> : null}
           <h2 className="card-title">{project.title}</h2>
           <p className="card-summary">{project.summary}</p>
         </div>

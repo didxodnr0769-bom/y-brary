@@ -17,7 +17,7 @@ export function ProjectsPage({ query }: { query: string }) {
         count={projects.length}
       />
 
-      <SearchForm action="/" query={query} label="프로젝트 제목 또는 태그 검색" />
+      <SearchForm action="/projects" query={query} label="프로젝트 제목 또는 태그 검색" />
 
       {projects.length > 0 ? (
         <section className="project-grid" aria-label="프로젝트 목록">

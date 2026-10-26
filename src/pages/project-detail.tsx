@@ -29,7 +29,7 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
 
   return (
     <article className="detail-page">
-      <Link className="back-link" to="/">
+      <Link className="back-link" to="/projects">
         <span aria-hidden="true">←</span> 프로젝트 목록
       </Link>
 

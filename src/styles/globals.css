@@ -219,11 +219,14 @@ input {
 }
 
 .main-area {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   margin-left: 264px;
 }
 
 .content-container {
+  flex: 1;
   width: min(1520px, 100%);
   margin: 0 auto;
   padding: 68px clamp(40px, 4vw, 72px) 96px;
@@ -239,12 +242,27 @@ input {
 }
 
 .site-footer {
-  max-width: 1680px;
-  margin: 0 auto;
-  padding: 0 4% 24px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
   color: var(--muted);
   font-size: 12px;
-  text-align: right;
+}
+
+.site-footer-inner {
+  display: flex;
+  width: min(1520px, 100%);
+  margin: 0 auto;
+  padding: 24px clamp(40px, 4vw, 72px);
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+
+.site-footer-brand {
+  color: var(--foreground);
+  font-size: 14px;
 }
 
 .site-footer a:hover {
@@ -392,8 +410,13 @@ input {
   font-weight: 700;
 }
 
-.search-submit {
+.search-form .search-submit,
+.search-form .search-reset {
   height: 48px;
+  min-height: 48px;
+}
+
+.search-submit {
   cursor: pointer;
   background: var(--foreground);
   color: var(--surface);
@@ -497,6 +520,20 @@ input {
 .detail-hero img {
   object-fit: cover;
   transition: transform 240ms ease;
+}
+
+.review-card .card-media,
+.review-cover .detail-hero {
+  background: var(--surface);
+}
+
+.review-card .card-media img,
+.review-cover .detail-hero img {
+  object-fit: contain;
+}
+
+.review-card .card-link:hover .card-media img {
+  transform: none;
 }
 
 .image-fallback {
@@ -1071,6 +1108,7 @@ input {
     top: 0;
     z-index: 20;
     display: flex;
+    flex-shrink: 0;
     height: 64px;
     align-items: center;
     justify-content: space-between;
@@ -1112,6 +1150,10 @@ input {
     padding: 48px 28px 76px;
   }
 
+  .site-footer-inner {
+    padding: 24px 28px;
+  }
+
   .review-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1120,6 +1162,10 @@ input {
 @media (max-width: 640px) {
   .content-container {
     padding: 36px 18px 64px;
+  }
+
+  .site-footer-inner {
+    padding: 24px 18px;
   }
 
   .content-header {

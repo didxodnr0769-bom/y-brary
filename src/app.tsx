@@ -9,6 +9,7 @@ import { assetUrl } from "@/lib/urls";
 import { LearningNotesPage } from "@/pages/notes";
 import { NotFoundPage } from "@/pages/not-found";
 import { ProjectsPage } from "@/pages/projects";
+import { HomePage } from "@/pages/home";
 import { ReviewDetailPage } from "@/pages/review-detail";
 
 const ProjectDetailPage = lazy(() => import("@/pages/project-detail").then((module) => ({ default: module.ProjectDetailPage })));
@@ -21,7 +22,7 @@ function DetailRoute({ kind }: { kind: "project" | "book" | "course" | "note" })
   return <ReviewDetailPage kind={kind} slug={slug} />;
 }
 
-const titles: Record<string, string> = { "/": "프로젝트", "/books": "책", "/courses": "강의 기록", "/notes": "학습 정리" };
+const titles: Record<string, string> = { "/": "홈", "/projects": "프로젝트", "/books": "책", "/courses": "강의 기록", "/notes": "학습 정리" };
 
 function PageMetadata() {
   const { pathname } = useLocation();
@@ -52,7 +53,8 @@ export function App() {
       <PageMetadata />
       <Suspense fallback={<p role="status">기록을 불러오는 중입니다.</p>}>
       <Routes>
-        <Route path="/" element={<ProjectsPage query={query} />} />
+        <Route path="/" element={<HomePage query={query} />} />
+        <Route path="/projects" element={<ProjectsPage query={query} />} />
         <Route path="/books" element={<ReviewListPage kind="book" query={query} />} />
         <Route path="/courses" element={<ReviewListPage kind="course" query={query} />} />
         <Route path="/notes" element={<LearningNotesPage query={query} />} />

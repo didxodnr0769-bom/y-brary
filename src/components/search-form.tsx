@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
-type SearchPath = "/" | "/books" | "/courses" | "/notes";
+type SearchPath = "/" | "/projects" | "/books" | "/courses" | "/notes";
 
 type SearchFormProps = {
   action: SearchPath;

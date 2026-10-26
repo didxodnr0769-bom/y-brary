@@ -31,6 +31,18 @@ describe("reviewSchema", () => {
     expect(() => reviewSchema.parse({ ...validReview, body: "가".repeat(2001) })).toThrow();
   });
 
+  it("책의 독서 시작일과 읽은 곳을 보존하고 시작일이 없는 기존 기록도 허용한다", () => {
+    const book = reviewSchema.parse({ ...validReview, startedOn: "2026-07-05", readingSource: "직접 소장" });
+    expect(book).toMatchObject({ startedOn: "2026-07-05", readingSource: "직접 소장" });
+    expect(reviewSchema.safeParse(validReview).success).toBe(true);
+    expect(reviewSchema.safeParse({ ...validReview, startedOn: null }).success).toBe(true);
+  });
+
+  it("완독일보다 늦은 독서 시작일을 거부한다", () => {
+    expect(() => reviewSchema.parse({ ...validReview, startedOn: "2026-08-06" })).toThrow("독서 시작일은 완독일보다 늦을 수 없습니다.");
+    expect(reviewSchema.safeParse({ ...validReview, startedOn: validReview.consumedOn }).success).toBe(true);
+  });
+
   it("강의는 이미지 없이 플랫폼을 기록하고 책은 표지를 유지한다", () => {
     const course = reviewSchema.parse({ ...validReview, kind: "course", cover: null, platform: "학습 플랫폼" });
     expect(course.cover).toBeNull();

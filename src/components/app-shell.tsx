@@ -2,19 +2,20 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
+import { SiteFooter } from "@/components/site-footer";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { CloseIcon, MenuIcon } from "@/components/ui-icons";
-import { assetUrl } from "@/lib/urls";
 
 const navItems = [
-  { href: "/", label: "프로젝트", glyph: "01" },
+  { href: "/", label: "홈", glyph: "00" },
+  { href: "/projects", label: "프로젝트", glyph: "01" },
   { href: "/books", label: "책", glyph: "02" },
   { href: "/courses", label: "강의 기록", glyph: "03" },
   { href: "/notes", label: "학습 정리", glyph: "04" },
 ] as const;
 
 function isActivePath(pathname: string, href: (typeof navItems)[number]["href"]) {
-  if (href === "/") return pathname === "/" || pathname.startsWith("/projects/");
+  if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -97,11 +98,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         <main className="content-container">{children}</main>
-        <footer className="site-footer">
-          <a href={assetUrl("/notices/maplestory-font.txt")} target="_blank" rel="noreferrer">
-            메이플스토리 서체 저작권 안내
-          </a>
-        </footer>
+        <SiteFooter />
       </div>
     </div>
   );
