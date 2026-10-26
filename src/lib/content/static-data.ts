@@ -2,6 +2,60 @@ import { projectSchema, reviewSchema } from "@/lib/content/schema";
 
 export const projects = projectSchema.array().parse([
   {
+    id: "project-svn-workspace",
+    slug: "svn-workspace",
+    title: "SVN Workspace",
+    summary: "SVN 이력 조회와 변경 비교부터 선택 커밋까지 한곳에서 처리하는 macOS용 SVN 클라이언트.",
+    description: "평소 SVN으로 복잡한 작업을 하기보다는 이력 조회, 업데이트, 변경 비교와 커밋 같은 기본 기능을 주로 사용했습니다. Windows에서는 필요한 기능을 무료 프로그램으로 이용할 수 있었지만, macOS에서 찾아본 도구들은 유료이거나 사용에 제약이 있었습니다. 간단한 기능만 편하게 사용하기 위해 직접 만들어 사용하고 있습니다.\n\nSVN Workspace는 체크아웃, 업데이트, 변경 비교, 커밋에 집중한 데스크톱 앱입니다. 커밋 이력과 파일별 텍스트 diff를 확인하고, 필요한 변경만 골라 커밋할 수 있습니다.\n\n삭제된 폴더는 함께 삭제될 하위 항목을 미리 확인할 수 있으며, 여러 프로젝트 전환과 표시 이름 변경, VS Code 연결도 지원합니다.\n\nElectron·React·TypeScript로 구현했으며 맥에 설치된 SVN CLI를 직접 사용합니다. 별도 앱 계정이나 중계 서버 없이 로컬 작업 폴더를 연결하거나 저장소를 체크아웃해 사용합니다.\n\n이미지는 예제 데이터로 촬영한 실제 앱 화면입니다.",
+    thumbnail: {
+      url: "/content/projects/svn-workspace/history.webp",
+      alt: "예제 프로젝트의 커밋 목록과 선택한 파일의 변경 내용을 나란히 보여주는 SVN Workspace 이력 화면"
+    },
+    screenshots: [
+      {
+        id: "svn-workspace-selective-commit",
+        url: "/content/projects/svn-workspace/selective-commit.webp",
+        alt: "예제 저장소의 수정 파일과 새 파일을 선택하고 커밋 메시지를 작성하는 SVN Workspace 화면",
+        caption: "필요한 변경만 골라 커밋하는 화면",
+        sortOrder: 0
+      },
+      {
+        id: "svn-workspace-folder-deletion",
+        url: "/content/projects/svn-workspace/folder-deletion.webp",
+        alt: "삭제할 예제 폴더의 하위 파일 목록과 삭제 범위를 확인하는 SVN Workspace 화면",
+        caption: "삭제 폴더의 하위 항목과 내용을 확인하는 화면",
+        sortOrder: 1
+      },
+      {
+        id: "svn-workspace-checkout",
+        url: "/content/projects/svn-workspace/checkout.webp",
+        alt: "예제 SVN 저장소 URL과 저장할 로컬 폴더를 입력하는 SVN Workspace 체크아웃 화면",
+        caption: "새 저장소를 체크아웃하는 화면",
+        sortOrder: 2
+      },
+      {
+        id: "svn-workspace-project-management",
+        url: "/content/projects/svn-workspace/project-management.webp",
+        alt: "실제 파일과 로그인 정보를 유지하며 예제 프로젝트의 목록 등록만 제거하는 확인 화면",
+        caption: "프로젝트 목록 등록을 관리하는 화면",
+        sortOrder: 3
+      }
+    ],
+    githubUrl: "https://github.com/didxodnr0769-bom/svn-workspace",
+    liveUrl: null,
+    tags: [
+      "SVN",
+      "macOS",
+      "Electron",
+      "React",
+      "TypeScript",
+      "개발 도구"
+    ],
+    period: null,
+    publishedAt: "2026-10-26",
+    isSample: false
+  },
+  {
     id: "project-color-picker-game",
     slug: "color-picker-game",
     title: "Color Picker Game",

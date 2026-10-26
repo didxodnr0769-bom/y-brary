@@ -23,7 +23,7 @@ describe("React 앱 탐색", () => {
     expect(screen.getByRole("heading", { name: "젊은 베르테르의 슬픔" })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "프로젝트 헤일메리" })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "YBrary" })).toBeTruthy();
-    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(5);
+    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(6);
   });
 
   it("프로젝트 전용 목록과 검색은 /projects에 유지한다", () => {
@@ -32,7 +32,7 @@ describe("React 앱 탐색", () => {
     expect(screen.getByRole("heading", { name: "Major Scale Lab" })).toBeTruthy();
     expect(screen.queryByRole("heading", { name: "프로젝트 헤일메리" })).toBeNull();
     fireEvent.click(screen.getByRole("link", { name: "초기화" }));
-    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(3);
+    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(4);
   });
 
   it("학습 정리 직접 접속과 없는 기록의 안내를 표시한다", () => {

@@ -1,0 +1,22 @@
+SVN Workspace project screenshots
+
+Source repository: https://github.com/didxodnr0769-bom/svn-workspace
+Source branch: main
+Retrieved: 2026-10-26
+License: MIT (Copyright (c) 2026 Taewook)
+License URL: https://github.com/didxodnr0769-bom/svn-workspace/blob/main/LICENSE
+The original license text is preserved in LICENSE.source.txt.
+
+The source README states that these screenshots were captured in the real app
+using test data only; project names, authors, repository URLs and workspace
+paths are examples. They illustrate SVN Workspace rather than personal work.
+
+Original images:
+https://raw.githubusercontent.com/didxodnr0769-bom/svn-workspace/main/docs/images/history.png
+https://raw.githubusercontent.com/didxodnr0769-bom/svn-workspace/main/docs/images/selective-commit.png
+https://raw.githubusercontent.com/didxodnr0769-bom/svn-workspace/main/docs/images/folder-deletion.png
+https://raw.githubusercontent.com/didxodnr0769-bom/svn-workspace/main/docs/images/checkout.png
+https://raw.githubusercontent.com/didxodnr0769-bom/svn-workspace/main/docs/images/project-management.png
+
+Local versions retain the original aspect ratio and are encoded as WebP.
+The unreleased revert-review screenshot is not included.

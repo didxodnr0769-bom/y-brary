@@ -14,6 +14,7 @@ describe("static content repository", () => {
     const projects = await listProjects();
 
     expect(projects.map((project) => project.slug)).toEqual([
+      "svn-workspace",
       "color-picker-game",
       "major-scale-lab",
       "ybrary",
