@@ -5,8 +5,8 @@ export const projects = projectSchema.array().parse([
     id: "project-deskmate",
     slug: "deskmate",
     title: "DeskMate",
-    summary: "내 코딩 Agent와 함께 만들어 쓰는 macOS 데스크톱 동료.",
-    description: "바탕화면에서 함께하는 캐릭터에 필요한 기능을 더하며 사용하는 macOS 앱입니다. 자신의 코딩 Agent로 캐릭터의 외형과 행동, 앱 기능을 취향에 맞게 확장할 수 있습니다.\n\n근무시간을 보여주는 HP, 날짜별 할 일과 예약·반복 알림을 제공하며, 선택적으로 Codex CLI를 연결해 대화하거나 메모와 근무시간을 관리할 수 있습니다.\n\n돌멩이·검은 고양이·크림 토끼·첼시·츄츄 다섯 캐릭터와 크기 선택, 데스크톱 이동을 지원합니다. Electron·React·TypeScript와 Canvas 2D로 구현했으며, 소스를 받아 직접 실행·빌드하는 프로젝트입니다.\n\n소스를 수정하는 코딩 Agent와 앱 안에서 대화하는 연결은 별개의 기능입니다. 이미지는 예제 데이터로 촬영한 화면이며, 대화 화면은 모의 연결로 앱 명령 흐름을 보여줍니다.",
+    summary: "소스를 내려받아 원하는 에이전트를 연결하고, 필요한 기능과 캐릭터를 직접 추가해 쓰는 macOS 데스크톱 동료.",
+    description: "DeskMate는 소스를 내려받아 자신이 사용하는 에이전트를 연결하고, 필요한 기능과 캐릭터를 직접 추가해 쓰는 macOS 데스크톱 앱입니다. Codex·Claude 등 원하는 에이전트와 함께 소스를 수정하며 자신만의 데스크톱 동료로 만들어가는 것을 목표로 합니다.\n\n근무시간 HP, 날짜별 할 일, 예약·반복 알림과 캐릭터는 커스터마이징을 시작할 수 있는 기본 기능입니다. 이를 바탕으로 자신의 작업 방식에 맞는 기능과 동작을 더하고, 대화 연결도 원하는 에이전트에 맞게 구성할 수 있습니다.\n\nElectron·React·TypeScript와 Canvas 2D로 구현했으며, 소스를 받아 직접 실행·빌드하는 프로젝트입니다.\n\n이미지는 예제 데이터로 촬영한 화면이며, 대화 화면은 모의 연결로 앱 명령 흐름을 보여줍니다.",
     thumbnail: {
       url: "/content/projects/deskmate/overview.webp",
       alt: "돌멩이 캐릭터의 근무시간 HP와 메모 알림, 날짜별 할 일 관리 화면을 함께 배치한 DeskMate 소개 이미지"
