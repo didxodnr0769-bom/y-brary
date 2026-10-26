@@ -36,7 +36,7 @@ const reviewManifestSchema = z.object({
   title: z.string().min(1).max(200),
   creator: z.string().min(1).max(200),
   consumedOn: dateSchema,
-  rating: z.number().min(0.5).max(5).multipleOf(0.5),
+  rating: z.number().int().min(1).max(5),
   summary: z.string().min(1).max(300),
   body: z.string().min(1).max(2000),
   cover: localImageSchema,

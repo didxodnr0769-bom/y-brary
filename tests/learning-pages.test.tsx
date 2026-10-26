@@ -45,7 +45,7 @@ describe("학습 콘텐츠 화면", () => {
   it("강의 상세는 이미지 없이 강사, 플랫폼, 수강일과 후기를 표시한다", () => {
     const course = reviewSchema.parse({
       id: "test-course", kind: "course", slug: "test-course", title: "테스트용 강의",
-      creator: "테스트 강사", platform: "테스트 플랫폼", consumedOn: "2026-10-26", rating: 4.5,
+      creator: "테스트 강사", platform: "테스트 플랫폼", consumedOn: "2026-10-26", rating: 4,
       summary: "수강 요약", body: "수강 후기 본문", cover: null, publishedAt: "2026-10-26", isSample: true,
     });
     render(<MemoryRouter><ReviewDetail review={course} /></MemoryRouter>);
@@ -68,6 +68,7 @@ describe("학습 콘텐츠 화면", () => {
     expect(screen.getByText("완독일").nextElementSibling?.textContent).toBe("2026. 10. 25.");
     expect(screen.getByText("읽은 곳").nextElementSibling?.textContent).toBe("직접 소장");
     expect(screen.queryByText("감상일")).toBeNull();
+    expect(screen.getByLabelText("5점 만점에 4점").textContent).toBe("4 / 5");
   });
 
   it("학습 Markdown의 제목, 강조와 코드 블록을 렌더링한다", () => {

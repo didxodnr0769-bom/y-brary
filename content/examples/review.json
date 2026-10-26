@@ -4,7 +4,7 @@
   "title": "리뷰 예시",
   "creator": "저자명",
   "consumedOn": "2026-08-05",
-  "rating": 4.5,
+  "rating": 4,
   "summary": "게시 형식 확인을 위한 리뷰 예시입니다.",
   "body": "실제 감상 기록을 content/drafts 아래에서 작성한 뒤 미리보기와 승인을 거쳐 게시합니다.",
   "cover": {

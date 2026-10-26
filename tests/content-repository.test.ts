@@ -14,6 +14,7 @@ describe("static content repository", () => {
     const projects = await listProjects();
 
     expect(projects.map((project) => project.slug)).toEqual([
+      "deskmate",
       "svn-workspace",
       "color-picker-game",
       "major-scale-lab",
@@ -61,6 +62,7 @@ describe("static content repository", () => {
   it("등록된 실제 책을 제공하고 샘플과 미등록 기록은 제공하지 않는다", async () => {
     await expect(listReviews("book")).toMatchObject([
       { slug: "the-sorrows-of-young-werther", isSample: false },
+      { slug: "the-martian", isSample: false },
       { slug: "project-hail-mary", isSample: false },
     ]);
     await expect(listReviews("course")).toEqual([]);

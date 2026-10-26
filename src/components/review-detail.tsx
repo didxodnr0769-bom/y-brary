@@ -69,7 +69,7 @@ export function ReviewDetail({ review }: { review: Review }) {
               <div>
                 <dt>별점</dt>
                 <dd className="rating" aria-label={`5점 만점에 ${review.rating}점`}>
-                  {review.rating.toFixed(1)} / 5
+                  {review.rating} / 5
                 </dd>
               </div>
               {review.kind === "course" && review.platform ? (

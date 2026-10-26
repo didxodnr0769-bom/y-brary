@@ -10,7 +10,7 @@ const validReview = {
   title: "리뷰",
   creator: "저자",
   consumedOn: "2026-08-05",
-  rating: 4.5,
+  rating: 4,
   summary: "한 줄 감상",
   body: "상세 감상",
   cover: { url: "/cover.svg", alt: "표지" },
@@ -19,12 +19,20 @@ const validReview = {
 };
 
 describe("reviewSchema", () => {
-  it("0.5 단위 별점을 허용한다", () => {
-    expect(reviewSchema.parse(validReview).rating).toBe(4.5);
+  it("책과 강의에 1점부터 5점까지 정수 별점을 허용한다", () => {
+    for (const kind of ["book", "course"]) {
+      for (const rating of [1, 2, 3, 4, 5]) {
+        expect(reviewSchema.parse({ ...validReview, kind, rating }).rating).toBe(rating);
+      }
+    }
   });
 
-  it("0.5 단위가 아닌 별점을 거부한다", () => {
-    expect(() => reviewSchema.parse({ ...validReview, rating: 4.2 })).toThrow();
+  it("책과 강의에서 소수점과 범위 밖 별점을 거부한다", () => {
+    for (const kind of ["book", "course"]) {
+      for (const rating of [0, 0.5, 3.5, 4.2, 6]) {
+        expect(reviewSchema.safeParse({ ...validReview, kind, rating }).success).toBe(false);
+      }
+    }
   });
 
   it("2,000자를 넘는 상세 감상을 거부한다", () => {
@@ -134,6 +142,16 @@ describe("projectSchema", () => {
 });
 
 describe("contentManifestSchema", () => {
+  it("게시용 리뷰에도 정수 별점만 허용한다", () => {
+    const manifest = { ...validReview, cover: { source: "./cover.png", alt: "표지" } };
+    for (const rating of [1, 5]) {
+      expect(contentManifestSchema.safeParse({ ...manifest, rating }).success).toBe(true);
+    }
+    for (const rating of [0, 0.5, 3.5, 4.2, 6]) {
+      expect(contentManifestSchema.safeParse({ ...manifest, rating }).success).toBe(false);
+    }
+  });
+
   it("승인 전 파일 형식에서 이미지 원본 경로를 검증한다", () => {
     const result = contentManifestSchema.safeParse({
       kind: "film",

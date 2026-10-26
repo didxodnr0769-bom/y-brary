@@ -1,0 +1,18 @@
+DeskMate project screenshots
+
+Source repository: https://github.com/didxodnr0769-bom/deskmate
+Source revision: a3892b96f8381370b98ef10025ce458fc742daa2
+Retrieved: 2026-10-26
+License: MIT (Copyright (c) 2026 DeskMate contributors)
+License URL: https://github.com/didxodnr0769-bom/deskmate/blob/a3892b96f8381370b98ef10025ce458fc742daa2/LICENSE
+The original license text is preserved in LICENSE.source.txt.
+
+Original images: docs/images/companion.png, memos.png, chat.png, settings.png
+Asset policy: https://github.com/didxodnr0769-bom/deskmate/blob/a3892b96f8381370b98ef10025ce458fc742daa2/docs/assets.md
+The source asset policy applies MIT terms to these example screenshots within
+the project's rights. They contain example memos and demo chat, with no personal
+records or authentication information. The chat screenshot uses a mock connection
+to illustrate UI and app commands; it does not demonstrate actual AI performance.
+
+Images are losslessly encoded as WebP at their original dimensions.
+overview.webp arranges companion.png and memos.png on a plain background.

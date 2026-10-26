@@ -35,7 +35,7 @@ export function ReviewCard({ eager = false, review }: { eager?: boolean; review:
           <div className="review-meta">
             <span>{review.creator}</span>
             <span className="rating" aria-label={`5점 만점에 ${review.rating}점`}>
-              {review.rating.toFixed(1)} / 5
+              {review.rating} / 5
             </span>
           </div>
           <p className="card-summary">{review.summary}</p>
