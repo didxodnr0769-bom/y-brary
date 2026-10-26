@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Maplestory";
+  src: url("../assets/fonts/maplestory-light.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Maplestory";
+  src: url("../assets/fonts/maplestory-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-maplestory: "Maplestory";
+}
+
 :root,
 [data-theme="light"] {
   --background: #f4f1e9;
@@ -218,6 +238,20 @@ input {
   gap: 34px;
 }
 
+.site-footer {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0 4% 24px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 .content-header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -344,6 +378,52 @@ input {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 34px 16px;
+}
+
+.learning-note-list {
+  display: grid;
+  gap: 18px;
+}
+
+.learning-note-card {
+  min-width: 0;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.learning-note-card .card-link {
+  display: grid;
+  gap: 16px;
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.learning-note-card:hover {
+  border-color: var(--accent);
+}
+
+.learning-note-card .card-title,
+.learning-note-detail .detail-title {
+  overflow-wrap: anywhere;
+}
+
+.learning-note-card .card-summary {
+  display: block;
+}
+
+.learning-note-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--accent);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.learning-note-detail .review-body {
+  overflow-wrap: anywhere;
 }
 
 .content-card {
@@ -1133,3 +1213,19 @@ input {
     transition-duration: 0.01ms !important;
   }
 }
+
+.learning-markdown {
+  max-width: 1040px;
+  color: var(--foreground);
+  font-size: 17px;
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+.learning-markdown > :first-child { margin-top: 0; }
+.learning-markdown h2, .learning-markdown h3 { line-height: 1.5; margin-top: 1.8em; }
+.learning-markdown a { color: var(--accent); text-decoration: underline; }
+.learning-markdown pre { overflow-x: auto; padding: 18px; background: var(--surface); border: 1px solid var(--border); }
+.learning-markdown code { font-family: ui-monospace, monospace; font-size: 0.85em; }
+.learning-markdown blockquote { margin-left: 0; padding-left: 20px; border-left: 3px solid var(--accent); color: var(--muted); }
+.learning-markdown img { max-width: 100%; height: auto; }

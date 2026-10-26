@@ -14,11 +14,12 @@
 # testing
 /coverage
 
-# next.js
+# legacy build artifacts
 /.next/
 /out/
 
 # production
+/dist
 /build
 
 # misc

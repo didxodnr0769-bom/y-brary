@@ -42,9 +42,9 @@ export const projectSchema = z.object({
   isSample: z.boolean().default(false),
 });
 
-export const reviewKindSchema = z.enum(["book", "film"]);
+export const reviewKindSchema = z.enum(["book", "course"]);
 
-export const reviewSchema = z.object({
+const reviewFields = z.object({
   id: z.string().min(1),
   kind: reviewKindSchema,
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
@@ -59,6 +59,28 @@ export const reviewSchema = z.object({
   isSample: z.boolean().default(false),
 });
 
+export const reviewSchema = z.discriminatedUnion("kind", [
+  reviewFields.extend({ kind: z.literal("book") }),
+  reviewFields.extend({
+    kind: z.literal("course"),
+    cover: imageAssetSchema.nullable().default(null),
+    platform: z.string().min(1).max(120).optional(),
+  }),
+]);
+
+export const learningNoteSchema = z.object({
+  id: z.string().min(1),
+  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+  title: z.string().min(1).max(200),
+  summary: z.string().min(1).max(300),
+  body: z.string().min(1).max(20000),
+  studiedOn: dateSchema,
+  tags: z.array(z.string().min(1).max(30)).max(8).default([]),
+  publishedAt: dateSchema,
+  isSample: z.boolean().default(false),
+});
+
+export type LearningNote = z.infer<typeof learningNoteSchema>;
 export type Project = z.infer<typeof projectSchema>;
 export type Review = z.infer<typeof reviewSchema>;
 export type ReviewKind = z.infer<typeof reviewKindSchema>;

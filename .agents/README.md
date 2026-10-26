@@ -6,4 +6,4 @@
 - `../docs/content-publishing.md`: 사람이 읽는 게시 절차
 - `workflows/content-publishing.md`: Codex가 따라야 할 승인 경계와 검증 순서
 
-구현을 변경하기 전 루트 `AGENTS.md`의 Next.js 버전별 문서 확인 규칙도 함께 따른다.
+현재 앱은 React + Vite 기반의 정적 사이트다. 구현을 변경하기 전 루트 `AGENTS.md`와 `README.md`의 콘텐츠·빌드 규칙을 함께 따른다.

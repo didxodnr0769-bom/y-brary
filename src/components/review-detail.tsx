@@ -1,13 +1,12 @@
-import type { Route } from "next";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 import { ContentImage } from "@/components/content-image";
 import { formatDate } from "@/lib/content/format";
 import type { Review } from "@/lib/content/schema";
 
 const kindCopy = {
-  book: { label: "책", collection: "/books" as Route, creator: "저자", type: "Book" },
-  film: { label: "영화", collection: "/films" as Route, creator: "감독", type: "Film" },
+  book: { label: "책", collection: "/books", creator: "저자", type: "Book", date: "감상일", note: "리뷰" },
+  course: { label: "강의", collection: "/courses", creator: "강사", type: "Course", date: "수강일", note: "수강 후기" },
 };
 
 export function ReviewDetail({ review }: { review: Review }) {
@@ -15,14 +14,14 @@ export function ReviewDetail({ review }: { review: Review }) {
 
   return (
     <article className="detail-page">
-      <Link className="back-link" href={copy.collection}>
+      <Link className="back-link" to={copy.collection}>
         <span aria-hidden="true">←</span> {copy.label} 목록
       </Link>
 
       <div className="review-detail-layout">
         <div className="review-cover">
           <div className="detail-hero">
-            <ContentImage src={review.cover.url} alt={review.cover.alt} fill sizes="(max-width: 640px) 90vw, 340px" />
+            <ContentImage src={review.cover?.url} alt={review.cover?.alt ?? "강의 이미지 미첨부"} fill sizes="(max-width: 640px) 90vw, 340px" />
           </div>
         </div>
 
@@ -44,7 +43,7 @@ export function ReviewDetail({ review }: { review: Review }) {
                 <dd>{review.creator}</dd>
               </div>
               <div>
-                <dt>감상일</dt>
+                <dt>{copy.date}</dt>
                 <dd>{formatDate(review.consumedOn)}</dd>
               </div>
               <div>
@@ -53,6 +52,12 @@ export function ReviewDetail({ review }: { review: Review }) {
                   {review.rating.toFixed(1)} / 5
                 </dd>
               </div>
+              {review.kind === "course" && review.platform ? (
+                <div>
+                  <dt>플랫폼</dt>
+                  <dd>{review.platform}</dd>
+                </div>
+              ) : null}
             </dl>
           </header>
         </div>
@@ -60,7 +65,7 @@ export function ReviewDetail({ review }: { review: Review }) {
 
       <section className="review-note-section" aria-labelledby="review-note-title">
         <div className="section-heading">
-          <h2 id="review-note-title">리뷰</h2>
+          <h2 id="review-note-title">{copy.note}</h2>
           <span>Review note</span>
         </div>
         <p className="review-body">{review.body}</p>

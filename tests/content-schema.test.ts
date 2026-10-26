@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { projectSchema, reviewSchema } from "@/lib/content/schema";
+import { learningNoteSchema, projectSchema, reviewSchema } from "@/lib/content/schema";
 import { contentManifestSchema } from "../scripts/content/manifest.ts";
 
 const validReview = {
@@ -29,6 +29,33 @@ describe("reviewSchema", () => {
 
   it("2,000자를 넘는 상세 감상을 거부한다", () => {
     expect(() => reviewSchema.parse({ ...validReview, body: "가".repeat(2001) })).toThrow();
+  });
+
+  it("강의는 이미지 없이 플랫폼을 기록하고 책은 표지를 유지한다", () => {
+    const course = reviewSchema.parse({ ...validReview, kind: "course", cover: null, platform: "학습 플랫폼" });
+    expect(course.cover).toBeNull();
+    expect(course.kind === "course" && course.platform).toBe("학습 플랫폼");
+    expect(reviewSchema.safeParse({ ...validReview, cover: null }).success).toBe(false);
+    expect(reviewSchema.safeParse({ ...validReview, kind: "film" }).success).toBe(false);
+  });
+});
+
+describe("learningNoteSchema", () => {
+  const note = {
+    id: "test-note", slug: "test-note", title: "테스트용 학습 정리",
+    summary: "테스트 데이터", body: "개념과 실습을 정리합니다.",
+    studiedOn: "2026-10-26", publishedAt: "2026-10-26",
+  };
+
+  it("이미지와 별점 없이 긴 학습 본문을 허용한다", () => {
+    expect(learningNoteSchema.parse({ ...note, body: "가".repeat(20000) }).tags).toEqual([]);
+    expect(learningNoteSchema.safeParse({ ...note, body: "가".repeat(20001) }).success).toBe(false);
+  });
+
+  it("빈 본문과 과도한 태그를 거부한다", () => {
+    expect(learningNoteSchema.safeParse({ ...note, body: "" }).success).toBe(false);
+    expect(learningNoteSchema.safeParse({ ...note, tags: Array(9).fill("주제") }).success).toBe(false);
+    expect(learningNoteSchema.safeParse({ ...note, tags: ["가".repeat(31)] }).success).toBe(false);
   });
 });
 

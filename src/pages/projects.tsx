@@ -1,24 +1,12 @@
-import type { Metadata } from "next";
 
 import { ContentHeader } from "@/components/content-header";
 import { EmptyState } from "@/components/empty-state";
 import { ProjectCard } from "@/components/project-card";
 import { SearchForm } from "@/components/search-form";
 import { listProjects } from "@/lib/content/repository";
-import { readSearchQuery } from "@/lib/content/search";
 
-export const metadata: Metadata = {
-  title: "프로젝트",
-  description: "양태욱의 사이드 프로젝트를 모아보는 아카이브입니다.",
-};
-
-type HomePageProps = {
-  searchParams: Promise<{ q?: string | string[] }>;
-};
-
-export default async function HomePage({ searchParams }: HomePageProps) {
-  const query = readSearchQuery(await searchParams);
-  const projects = await listProjects(query);
+export function ProjectsPage({ query }: { query: string }) {
+  const projects = listProjects(query);
 
   return (
     <div className="page-stack">

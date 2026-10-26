@@ -13,17 +13,17 @@ const copy = {
     label: "책",
     action: "/books" as const,
   },
-  film: {
-    eyebrow: "Films",
-    title: "보고 오래 남은 장면들",
-    description: "영화를 본 날짜와 별점, 한 줄 감상, 자세한 기록을 최신순으로 모읍니다.",
-    label: "영화",
-    action: "/films" as const,
+  course: {
+    eyebrow: "Courses",
+    title: "배우고 남긴 강의 기록",
+    description: "수강한 강의의 날짜와 별점, 한 줄 후기, 자세한 기록을 최신순으로 모읍니다.",
+    label: "강의",
+    action: "/courses" as const,
   },
 };
 
-export async function ReviewListPage({ kind, query }: { kind: ReviewKind; query: string }) {
-  const reviews = await listReviews(kind, query);
+export function ReviewListPage({ kind, query }: { kind: ReviewKind; query: string }) {
+  const reviews = listReviews(kind, query);
   const pageCopy = copy[kind];
 
   return (
@@ -36,13 +36,13 @@ export async function ReviewListPage({ kind, query }: { kind: ReviewKind; query:
       />
       <SearchForm action={pageCopy.action} query={query} label={`${pageCopy.label} 제목 검색`} />
       {reviews.length > 0 ? (
-        <section className="review-grid" aria-label={`${pageCopy.label} 리뷰 목록`}>
+        <section className="review-grid" aria-label={kind === "book" ? "책 리뷰 목록" : "강의 기록 목록"}>
           {reviews.map((review, index) => (
             <ReviewCard key={review.id} review={review} eager={index === 0} />
           ))}
         </section>
       ) : (
-        <EmptyState query={query} label={`${pageCopy.label} 리뷰`} />
+        <EmptyState query={query} label={kind === "book" ? "책 리뷰" : "강의 기록"} particle={kind === "book" ? "가" : "이"} />
       )}
     </div>
   );

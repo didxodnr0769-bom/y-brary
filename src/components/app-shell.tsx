@@ -1,16 +1,16 @@
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { CloseIcon, MenuIcon } from "@/components/ui-icons";
+import { assetUrl } from "@/lib/urls";
 
 const navItems = [
   { href: "/", label: "프로젝트", glyph: "01" },
   { href: "/books", label: "책", glyph: "02" },
-  { href: "/films", label: "영화", glyph: "03" },
+  { href: "/courses", label: "강의 기록", glyph: "03" },
+  { href: "/notes", label: "학습 정리", glyph: "04" },
 ] as const;
 
 function isActivePath(pathname: string, href: (typeof navItems)[number]["href"]) {
@@ -19,7 +19,7 @@ function isActivePath(pathname: string, href: (typeof navItems)[number]["href"])
 }
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -34,7 +34,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       ) : null}
 
       <aside className="sidebar" id="primary-navigation" data-open={menuOpen}>
-        <Link href="/" className="brand" onClick={() => setMenuOpen(false)}>
+        <Link to="/" className="brand" onClick={() => setMenuOpen(false)}>
           <span className="brand-mark" aria-hidden="true">
             YB
           </span>
@@ -58,7 +58,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             return (
               <Link
                 key={item.href}
-                href={item.href}
+                to={item.href}
                 className="nav-link"
                 aria-current={active ? "page" : undefined}
                 onClick={() => setMenuOpen(false)}
@@ -79,7 +79,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       <div className="main-area">
         <header className="mobile-header">
-          <Link href="/" className="mobile-brand">
+          <Link to="/" className="mobile-brand">
             YBrary
           </Link>
           <div className="mobile-actions">
@@ -97,6 +97,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         <main className="content-container">{children}</main>
+        <footer className="site-footer">
+          <a href={assetUrl("/notices/maplestory-font.txt")} target="_blank" rel="noreferrer">
+            메이플스토리 서체 저작권 안내
+          </a>
+        </footer>
       </div>
     </div>
   );

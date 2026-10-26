@@ -1,14 +1,44 @@
-# 콘텐츠 게시 가이드
+# 콘텐츠 관리 및 게시 가이드
 
-YBrary 콘텐츠는 JSON manifest와 로컬 이미지로 준비한다. 게시 작업은 외부 데이터를 변경하므로 미리보기와 명시적 승인을 분리한다.
+현재 앱은 저장소의 콘텐츠를 빌드에 포함한다. 콘텐츠 입력·수정은 소스 파일을 편집하고 로컬 화면에서 확인한 뒤 다시 빌드하는 방식이다. 방문자 화면에는 조회와 검색만 제공한다.
 
-## 1. draft 준비
+## 현재 앱 콘텐츠 수정
+
+1. 프로젝트·책·강의는 `src/lib/content/static-data.ts`에서 수정한다. 확인된 개인 사실·날짜·별점·본문만 입력한다.
+2. 학습 정리는 `content/notes/<slug>.md`로 작성한다. YAML frontmatter에는 `id`, `slug`, `title`, `summary`, `studiedOn`, `publishedAt`을 넣고 필요하면 `tags`, `isSample`을 지정한다. 날짜는 문자열로 작성하고 frontmatter 아래에 Markdown 본문을 둔다.
+3. 이미지가 있다면 공개 권리와 출처, 대체 텍스트를 확인한다. 임의의 실제 기록이나 이미지를 채우지 않는다.
+4. `pnpm dev`로 로컬 화면을 열어 목록·검색·상세·날짜·이미지와 모바일 및 라이트·다크 테마를 확인한다.
+5. `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`로 검증한다. 학습 정리를 포함한 콘텐츠는 Zod 스키마를 통과해야 빌드할 수 있다.
+6. 정확한 콘텐츠의 미리보기에 명시적 승인을 받은 뒤 원격 반영과 배포를 진행한다. 로컬 파일 수정 승인은 원격 게시 승인과 별개다.
+
+학습 정리에는 이미지와 별점을 넣지 않는다. 실제 기록이 없다면 빈 목록을 유지하며, 샘플은 샘플임을 명확히 표시한다.
+
+## 정적 빌드와 배포
+
+```bash
+pnpm build
+pnpm preview
+```
+
+빌드 결과는 `dist/`다. GitHub Pages의 저장소 경로가 `/y-brary/`라면 `VITE_BASE_PATH=/y-brary/ pnpm build`로 빌드한다. 운영 주소는 `VITE_SITE_URL`에 지정하고, 검색 엔진 색인이 필요할 때만 `VITE_ENABLE_INDEXING=true`를 설정한다. `VITE_*` 변수는 공개되므로 비밀값을 저장하지 않는다.
+
+빌드 시 목록과 등록된 상세 경로마다 `index.html` 셸을 복사하고 `404.html`을 생성한다. 유효한 상세 URL의 직접 접근과 새로고침을 지원하지만, 본문은 브라우저에서 렌더링하며 페이지별 HTML 본문 프리렌더링은 제공하지 않는다.
+
+GitHub Pages는 `.github/workflows/deploy-pages.yml`을 수동 실행해 배포한다. 저장소에 승인된 소스를 반영하고 Pages의 게시 방식을 GitHub Actions로 설정한 뒤, Actions의 `Deploy YBrary to GitHub Pages`에서 `Run workflow`를 실행한다. 린트·타입 검사·테스트·빌드가 통과해야 `dist/` 배포를 진행한다. 소스 push만으로 배포하지 않으며, 정확한 미리보기 승인 후 실행한다.
+
+## 기존 Supabase 원격 게시 도구
+
+다음 절차는 보존된 Supabase 원격 게시 도구용이다. 현재 정적 앱에서 읽지 않으므로 이 도구로 게시해도 현재 앱 화면에는 반영되지 않는다. 기존 도구는 프로젝트와 책·영화 리뷰(`book`/`film`)를 지원하며, 현재 화면의 강의 기록·학습 정리는 지원하지 않는다. 스키마와 게시 도구의 전환은 별도 작업이다.
+
+원격 게시용 콘텐츠는 JSON manifest와 로컬 이미지로 준비한다. 게시 작업은 외부 데이터를 변경하므로 정확한 콘텐츠의 미리보기와 명시적 승인을 분리한다.
+
+### 1. draft 준비
 
 `content/examples/project.json` 또는 `content/examples/review.json`을 `content/drafts/`에 복사해 수정한다. 이미지의 `source`는 manifest 파일을 기준으로 한 상대 경로 또는 절대 경로다.
 
 프로젝트는 썸네일과 1~6개의 스크린샷이 필요하다. 리뷰는 표지 또는 포스터가 필요하다. 모든 이미지에 실제 화면이나 대상을 설명하는 대체 텍스트를 쓴다.
 
-## 2. 미리보기
+### 2. 미리보기
 
 ```bash
 pnpm content:preview content/drafts/<파일>.json
@@ -23,7 +53,7 @@ pnpm content:preview content/drafts/<파일>.json
 - 대체 텍스트가 의미를 전달하는가
 - URL과 공개일이 맞는가
 
-## 3. 승인 후 게시
+### 3. 승인 후 게시
 
 `.env.local` 또는 현재 셸에 Supabase URL, 공개 키, 비밀키를 설정한다. 비밀키를 로그, 커밋, 브라우저 코드에 넣지 않는다.
 
@@ -33,7 +63,7 @@ pnpm content:publish content/drafts/<파일>.json --approved
 
 게시 도구는 이미지를 회전 보정·리사이즈하고 WebP로 변환한다. 콘텐츠 해시가 포함된 경로로 `media` 버킷에 업로드한 다음 프로젝트 또는 리뷰 RPC를 호출한다. RPC 내부의 데이터 변경은 한 트랜잭션으로 처리된다. 데이터 반영이 실패하면 이번 실행에서 새로 올린 이미지는 제거를 시도한다.
 
-## 4. 게시 후 확인
+### 4. 게시 후 확인
 
 - 목록에서 제목, 이미지, 날짜, 정렬을 확인한다.
 - 검색 결과와 상세 페이지를 확인한다.

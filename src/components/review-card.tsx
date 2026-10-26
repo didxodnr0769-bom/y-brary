@@ -1,5 +1,4 @@
-import type { Route } from "next";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 import { ContentImage } from "@/components/content-image";
 import { formatDate } from "@/lib/content/format";
@@ -7,20 +6,20 @@ import type { Review } from "@/lib/content/schema";
 
 const kindLabel = {
   book: "Book",
-  film: "Film",
+  course: "Course",
 } as const;
 
 export function ReviewCard({ eager = false, review }: { eager?: boolean; review: Review }) {
-  const collection = review.kind === "book" ? "books" : "films";
-  const href = `/${collection}/${review.slug}` as Route;
+  const collection = review.kind === "book" ? "books" : "courses";
+  const href = `/${collection}/${review.slug}`;
 
   return (
     <article className="content-card review-card">
-      <Link className="card-link" href={href}>
+      <Link className="card-link" to={href}>
         <div className="card-media">
           <ContentImage
-            src={review.cover.url}
-            alt={review.cover.alt}
+            src={review.cover?.url}
+            alt={review.cover?.alt ?? "강의 이미지 미첨부"}
             fill
             loading={eager ? "eager" : "lazy"}
             sizes="(max-width: 640px) 50vw, (max-width: 760px) 33vw, (max-width: 1200px) 25vw, 220px"

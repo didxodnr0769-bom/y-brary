@@ -1,24 +1,13 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import { Link } from "react-router-dom";
+import { NotFoundPage } from "@/pages/not-found";
 
 import { ProjectGallery, type ProjectGalleryImage } from "@/components/project-gallery";
 import { formatDateRange } from "@/lib/content/format";
 import { getProjectBySlug } from "@/lib/content/repository";
 
-type ProjectPageProps = {
-  params: Promise<{ slug: string }>;
-};
-
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const project = await getProjectBySlug((await params).slug);
-  if (!project) return { title: "프로젝트를 찾을 수 없음" };
-  return { title: project.title, description: project.summary };
-}
-
-export default async function ProjectDetailPage({ params }: ProjectPageProps) {
-  const project = await getProjectBySlug((await params).slug);
-  if (!project) notFound();
+export function ProjectDetailPage({ slug }: { slug: string }) {
+  const project = getProjectBySlug(slug);
+  if (!project) return <NotFoundPage />;
   const galleryImages: ProjectGalleryImage[] = [
     ...(project.thumbnail
       ? [
@@ -40,7 +29,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
   return (
     <article className="detail-page">
-      <Link className="back-link" href="/">
+      <Link className="back-link" to="/">
         <span aria-hidden="true">←</span> 프로젝트 목록
       </Link>
 

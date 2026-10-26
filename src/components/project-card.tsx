@@ -1,16 +1,15 @@
-import type { Route } from "next";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 import { ContentImage } from "@/components/content-image";
 import { formatDateRange } from "@/lib/content/format";
 import type { Project } from "@/lib/content/schema";
 
 export function ProjectCard({ eager = false, project }: { eager?: boolean; project: Project }) {
-  const href = `/projects/${project.slug}` as Route;
+  const href = `/projects/${project.slug}`;
 
   return (
     <article className="content-card project-card">
-      <Link className="card-link" href={href}>
+      <Link className="card-link" to={href}>
         <div className="card-media">
           <ContentImage
             src={project.thumbnail?.url}

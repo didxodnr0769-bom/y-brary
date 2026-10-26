@@ -1,11 +1,12 @@
-"use client";
+import { useState, type ImgHTMLAttributes } from "react";
 
-import Image, { type ImageProps } from "next/image";
-import { useState } from "react";
+import { assetUrl } from "@/lib/urls";
 
-type ContentImageProps = Omit<ImageProps, "onError" | "src"> & {
+type ContentImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "onError" | "src" | "alt"> & {
+  alt: string;
   fallbackText?: string;
-  src?: ImageProps["src"] | null;
+  src?: string | null;
+  fill?: boolean;
 };
 
 const defaultFallbackText = "아직 이미지가 첨부되지 않았어요.";
@@ -14,9 +15,11 @@ export function ContentImage({
   alt,
   fallbackText = defaultFallbackText,
   src,
+  fill,
+  style,
   ...imageProps
 }: ContentImageProps) {
-  const [failedSrc, setFailedSrc] = useState<ImageProps["src"] | null>(null);
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
 
   if (!src || failedSrc === src) {
     return (
@@ -29,5 +32,5 @@ export function ContentImage({
     );
   }
 
-  return <Image {...imageProps} src={src} alt={alt} onError={() => setFailedSrc(src)} />;
+  return <img {...imageProps} src={assetUrl(src)} alt={alt} decoding="async" style={fill ? { position: "absolute", inset: 0, width: "100%", height: "100%", ...style } : style} onError={() => setFailedSrc(src)} />;
 }

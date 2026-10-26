@@ -3,26 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build --webpack",
-    "start": "next start",
+    "dev": "vite --host 127.0.0.1 --port 3001 --strictPort",
+    "build": "vite build && node --import tsx scripts/build-static-routes.ts",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "content:preview": "node --import tsx scripts/content/preview.ts",
-    "content:publish": "node --import tsx scripts/content/publish.ts"
+    "content:publish": "node --import tsx scripts/content/publish.ts",
+    "preview": "vite preview --host 127.0.0.1 --port 3001 --strictPort"
   },
   "engines": {
     "node": ">=24 <25"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.112.0",
-    "next": "16.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "swiper": "14.0.7",
-    "zod": "4.4.3"
+    "zod": "4.4.3",
+    "react-router-dom": "^7.15.0",
+    "react-markdown": "^10.1.0",
+    "yaml": "^2.8.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -33,14 +35,17 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.5",
     "eslint": "^9",
-    "eslint-config-next": "16.3.0",
     "jsdom": "^30.0.1",
     "sharp": "0.35.3",
     "supabase": "2.111.0",
     "tailwindcss": "^4",
     "tsx": "4.23.5",
     "typescript": "^5",
-    "vitest": "4.1.10"
+    "vitest": "4.1.10",
+    "vite": "8.2.0",
+    "typescript-eslint": "8.66.0",
+    "eslint-plugin-react-hooks": "7.1.1"
   },
-  "packageManager": "pnpm@11.9.0"
+  "packageManager": "pnpm@11.9.0",
+  "type": "module"
 }

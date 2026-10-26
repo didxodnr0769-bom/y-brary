@@ -1,5 +1,3 @@
-"use client";
-
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Swiper as SwiperInstance } from "swiper";
 import { A11y, Keyboard } from "swiper/modules";

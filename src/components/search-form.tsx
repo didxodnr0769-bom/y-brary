@@ -1,6 +1,6 @@
-import Link from "next/link";
+import { Link, useNavigate } from "react-router-dom";
 
-type SearchPath = "/" | "/books" | "/films";
+type SearchPath = "/" | "/books" | "/courses" | "/notes";
 
 type SearchFormProps = {
   action: SearchPath;
@@ -9,11 +9,17 @@ type SearchFormProps = {
 };
 
 export function SearchForm({ action, query, label }: SearchFormProps) {
+  const navigate = useNavigate();
   return (
-    <form className="search-form" action={action} role="search">
+    <form className="search-form" role="search" onSubmit={(event) => {
+      event.preventDefault();
+      const value = String(new FormData(event.currentTarget).get("q") ?? "").trim().slice(0, 80);
+      navigate({ pathname: action, search: value ? `?${new URLSearchParams({ q: value })}` : "" });
+    }}>
       <label className="search-field">
         <span className="sr-only">{label}</span>
         <input
+          key={`${action}:${query}`}
           className="search-input"
           type="search"
           name="q"
@@ -26,7 +32,7 @@ export function SearchForm({ action, query, label }: SearchFormProps) {
         검색
       </button>
       {query ? (
-        <Link className="search-reset" href={action}>
+        <Link className="search-reset" to={action}>
           초기화
         </Link>
       ) : null}
