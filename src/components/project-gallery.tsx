@@ -1,59 +1,21 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import type { Swiper as SwiperInstance } from "swiper";
 import { A11y, Keyboard } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { ContentImage } from "@/components/content-image";
-import { ArrowIcon, CloseIcon } from "@/components/ui-icons";
+import { ImageLightbox, type LightboxImage } from "@/components/image-lightbox";
+import { ArrowIcon } from "@/components/ui-icons";
 
 import "swiper/css";
 
-export type ProjectGalleryImage = {
-  alt: string;
-  caption?: string;
-  id: string;
-  url: string;
-};
+export type ProjectGalleryImage = LightboxImage;
 
 export function ProjectGallery({ images }: { images: ProjectGalleryImage[] }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [slideIndex, setSlideIndex] = useState(0);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const swiperRef = useRef<SwiperInstance | null>(null);
   const imageCount = images.length;
-  const lightboxOpen = activeIndex !== null;
-
-  const showPrevious = useCallback(() => {
-    setActiveIndex((index) => (index === null ? null : Math.max(0, index - 1)));
-  }, []);
-
-  const showNext = useCallback(() => {
-    setActiveIndex((index) => (index === null ? null : Math.min(imageCount - 1, index + 1)));
-  }, [imageCount]);
-
-  useEffect(() => {
-    if (!lightboxOpen) return;
-
-    const previousOverflow = document.body.style.overflow;
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setActiveIndex(null);
-      if (event.key === "ArrowLeft") showPrevious();
-      if (event.key === "ArrowRight") showNext();
-    }
-
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", handleKeyDown);
-    closeButtonRef.current?.focus();
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [lightboxOpen, showNext, showPrevious]);
-
-  const selectedImage = activeIndex === null ? null : images[activeIndex];
-  const selectedPosition = activeIndex === null ? 0 : activeIndex + 1;
 
   if (imageCount === 0) {
     return (
@@ -72,7 +34,7 @@ export function ProjectGallery({ images }: { images: ProjectGalleryImage[] }) {
           <Swiper
             modules={[Keyboard, A11y]}
             slidesPerView={1}
-            keyboard={{ enabled: true, onlyInViewport: true }}
+            keyboard={{ enabled: activeIndex === null, onlyInViewport: true }}
             watchOverflow
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
@@ -150,62 +112,13 @@ export function ProjectGallery({ images }: { images: ProjectGalleryImage[] }) {
         ) : null}
       </section>
 
-      {selectedImage ? (
-        <div
-          className="gallery-lightbox"
-          role="dialog"
-          aria-modal="true"
-          aria-label="프로젝트 이미지 전체 화면 보기"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setActiveIndex(null);
-          }}
-        >
-          <button
-            ref={closeButtonRef}
-            className="gallery-lightbox-close"
-            type="button"
-            aria-label="전체 화면 닫기"
-            onClick={() => setActiveIndex(null)}
-          >
-            <CloseIcon />
-          </button>
-
-          {imageCount > 1 ? (
-            <button
-              className="gallery-lightbox-nav gallery-lightbox-prev"
-              type="button"
-              aria-label="이전 이미지"
-              disabled={selectedPosition === 1}
-              onClick={showPrevious}
-            >
-              <ArrowIcon direction="left" />
-            </button>
-          ) : null}
-
-          <div className="gallery-lightbox-stage">
-            <div className="gallery-lightbox-image">
-              <ContentImage src={selectedImage.url} alt={selectedImage.alt} fill sizes="100vw" />
-            </div>
-            <div className="gallery-lightbox-meta">
-              <span>{selectedImage.caption ?? selectedImage.alt}</span>
-              <span>
-                {String(selectedPosition).padStart(2, "0")} / {String(imageCount).padStart(2, "0")}
-              </span>
-            </div>
-          </div>
-
-          {imageCount > 1 ? (
-            <button
-              className="gallery-lightbox-nav gallery-lightbox-next"
-              type="button"
-              aria-label="다음 이미지"
-              disabled={selectedPosition === imageCount}
-              onClick={showNext}
-            >
-              <ArrowIcon direction="right" />
-            </button>
-          ) : null}
-        </div>
+      {activeIndex !== null ? (
+        <ImageLightbox
+          images={images}
+          initialIndex={activeIndex}
+          label="프로젝트 이미지 전체 화면 보기"
+          onClose={() => setActiveIndex(null)}
+        />
       ) : null}
     </>
   );

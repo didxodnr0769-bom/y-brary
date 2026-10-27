@@ -1,8 +1,11 @@
+import { lazy, Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { ContentImage } from "@/components/content-image";
 import { formatDate } from "@/lib/content/format";
 import type { Review } from "@/lib/content/schema";
+
+const ImageLightbox = lazy(() => import("@/components/image-lightbox").then((module) => ({ default: module.ImageLightbox })));
 
 const kindCopy = {
   book: { label: "책", collection: "/books", creator: "저자", type: "Book", date: "완독일", note: "리뷰" },
@@ -11,6 +14,7 @@ const kindCopy = {
 
 export function ReviewDetail({ review }: { review: Review }) {
   const copy = kindCopy[review.kind];
+  const [coverOpen, setCoverOpen] = useState(false);
 
   return (
     <article className="detail-page">
@@ -20,9 +24,20 @@ export function ReviewDetail({ review }: { review: Review }) {
 
       <div className="review-detail-layout">
         <div className="review-cover">
-          <div className="detail-hero">
-            <ContentImage src={review.cover?.url} alt={review.cover?.alt ?? "강의 이미지 미첨부"} fill sizes="(max-width: 640px) 90vw, 340px" />
-          </div>
+          {review.kind === "book" && review.cover ? (
+            <button
+              className="detail-hero review-cover-button"
+              type="button"
+              aria-label={`${review.title} 표지 크게 보기`}
+              onClick={() => setCoverOpen(true)}
+            >
+              <ContentImage src={review.cover.url} alt={review.cover.alt} fill sizes="(max-width: 640px) 90vw, 340px" />
+            </button>
+          ) : (
+            <div className="detail-hero">
+              <ContentImage src={review.cover?.url} alt={review.cover?.alt ?? "강의 이미지 미첨부"} fill sizes="(max-width: 640px) 90vw, 340px" />
+            </div>
+          )}
         </div>
 
         <div className="review-content">
@@ -90,6 +105,16 @@ export function ReviewDetail({ review }: { review: Review }) {
         </div>
         <p className="review-body">{review.body}</p>
       </section>
+      {coverOpen && review.cover ? (
+        <Suspense fallback={null}>
+          <ImageLightbox
+            images={[{ id: `${review.id}-cover`, url: review.cover.url, alt: review.cover.alt }]}
+            initialIndex={0}
+            label="책 표지 전체 화면 보기"
+            onClose={() => setCoverOpen(false)}
+          />
+        </Suspense>
+      ) : null}
     </article>
   );
 }
