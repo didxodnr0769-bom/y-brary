@@ -2,6 +2,53 @@ import { projectSchema, reviewSchema } from "@/lib/content/schema";
 
 export const projects = projectSchema.array().parse([
   {
+    id: "project-jev-playground",
+    slug: "jev-playground",
+    title: "Jev Playground",
+    summary: "Jev의 빠른 판단을 직접 실험하는 웹 실험실.",
+    description: "Jev Playground는 AI가 반환한 판단값을 실제 프로그램의 동작에 연결하는 네 가지 데모를 모은 웹사이트입니다. 예·아니오 판단, 후보 선택, 점수 평가를 서로 다른 상황에서 체험할 수 있도록 구성했습니다.\n\n마법의 소라고동은 사용자의 고민을 바탕으로 Yes 또는 No를 선택합니다. 칭찬 게시판은 글의 칭찬 여부와 관련성, 비판 여부를 검사하고 점수로 표현합니다. 등록한 글은 현재 화면에서만 보이며 새로고침하면 초기화됩니다.\n\n오목은 혼자 두기와 Jev AI 대결을 제공합니다. AI 대결에서는 흑돌과 백돌을 선택할 수 있으며, 렌주 기반 규칙으로 합법적인 착수 후보를 추린 뒤 Jev가 다음 수를 선택합니다.\n\n교통 시뮬레이터는 동일한 차량 유입을 두 교차로에 적용해 고정 신호와 Jev를 활용한 수요 기반 신호 제어를 비교합니다. 신호 선택과 차량 이동 규칙을 구분하고, 두 방식의 정차시간과 차량별 상태를 확인할 수 있습니다. 결과는 시나리오와 모델 판단, 통신 지연에 따라 달라집니다.\n\nNext.js·React·TypeScript로 구현했으며, Jev API는 서버에서 호출합니다. 이미지는 배포된 앱에서 촬영한 화면입니다. 칭찬 게시판에는 예시 글을 사용했고, 오목은 혼자 두기 예시이며 교통 시뮬레이터는 실행 전 화면입니다.",
+    thumbnail: {
+      url: "/content/projects/jev-playground/overview.webp",
+      alt: "Jev의 세 가지 판단 방식과 소라고동·칭찬 게시판·오목·교통 시뮬레이터를 소개하는 Jev Playground 메인 화면"
+    },
+    screenshots: [
+      {
+        id: "jev-playground-magic-conch",
+        url: "/content/projects/jev-playground/magic-conch.webp",
+        alt: "소라고동 그림과 고민을 자세히 입력하는 질문란을 보여주는 마법의 소라고동 화면",
+        caption: "고민을 바탕으로 Yes 또는 No를 선택하는 마법의 소라고동",
+        sortOrder: 0
+      },
+      {
+        id: "jev-playground-praise-board",
+        url: "/content/projects/jev-playground/praise-board.webp",
+        alt: "칭찬 남기기 버튼과 예시 글 세 개, 게시글 검색을 보여주는 오늘도 칭찬 게시판 화면",
+        caption: "칭찬과 관련성, 비판 여부를 검사하는 게시판의 예시 글 목록",
+        sortOrder: 1
+      },
+      {
+        id: "jev-playground-gomoku",
+        url: "/content/projects/jev-playground/gomoku.webp",
+        alt: "흑백 돌 일곱 개가 놓인 오목판과 플레이 모드, 흑 금수 안내, 최근 수순을 보여주는 혼자 두기 화면",
+        caption: "렌주 기반 규칙과 수순을 확인하는 오목 혼자 두기 예시",
+        sortOrder: 2
+      },
+      {
+        id: "jev-playground-traffic",
+        url: "/content/projects/jev-playground/traffic.webp",
+        alt: "실행 전 고정 신호와 Jev 제어 교차로, 시나리오 선택과 평균 정차시간 비교 영역을 보여주는 교통 시뮬레이터 화면",
+        caption: "같은 차량 유입으로 두 신호 제어 방식을 비교하는 교통 시뮬레이터의 실행 전 화면",
+        sortOrder: 3
+      }
+    ],
+    githubUrl: null,
+    liveUrl: "https://jev-simulator.vercel.app/",
+    tags: ["Jev", "AI", "Next.js", "React", "TypeScript", "인터랙티브 데모"],
+    period: null,
+    publishedAt: "2026-10-27",
+    isSample: false
+  },
+  {
     id: "project-worstcompare",
     slug: "worstcompare",
     title: "WorstCompare",
