@@ -9,7 +9,7 @@
 3. 이미지가 있다면 공개 권리와 출처, 대체 텍스트를 확인한다. 임의의 실제 기록이나 이미지를 채우지 않는다.
 4. `pnpm dev`로 로컬 화면을 열어 목록·검색·상세·날짜·이미지와 모바일 및 라이트·다크 테마를 확인한다.
 5. `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`로 검증한다. 학습 정리를 포함한 콘텐츠는 Zod 스키마를 통과해야 빌드할 수 있다.
-6. 정확한 콘텐츠의 미리보기에 명시적 승인을 받은 뒤 원격 반영과 배포를 진행한다. 로컬 파일 수정 승인은 원격 게시 승인과 별개다.
+6. 정확한 콘텐츠의 미리보기에 명시적 승인을 받은 뒤 `main`에 push한다. push하면 자동 배포되므로 원격 반영 전에 게시 승인을 마쳐야 한다. 로컬 파일 수정 승인은 원격 게시 승인과 별개다.
 
 학습 정리에는 이미지와 별점을 넣지 않는다. 실제 기록이 없다면 빈 목록을 유지하며, 샘플은 샘플임을 명확히 표시한다.
 
@@ -24,7 +24,7 @@ pnpm preview
 
 빌드 시 목록과 등록된 상세 경로마다 `index.html` 셸을 복사하고 `404.html`을 생성한다. 유효한 상세 URL의 직접 접근과 새로고침을 지원하지만, 본문은 브라우저에서 렌더링하며 페이지별 HTML 본문 프리렌더링은 제공하지 않는다.
 
-GitHub Pages는 `.github/workflows/deploy-pages.yml`을 수동 실행해 배포한다. 저장소에 승인된 소스를 반영하고 Pages의 게시 방식을 GitHub Actions로 설정한 뒤, Actions의 `Deploy YBrary to GitHub Pages`에서 `Run workflow`를 실행한다. 린트·타입 검사·테스트·빌드가 통과해야 `dist/` 배포를 진행한다. 소스 push만으로 배포하지 않으며, 정확한 미리보기 승인 후 실행한다.
+GitHub Pages의 게시 방식을 GitHub Actions로 설정하면, `main` 브랜치에 push할 때 `.github/workflows/deploy-pages.yml`이 자동 실행된다. 린트·타입 검사·테스트·빌드가 통과해야 `dist/` 배포를 진행한다. 공개 콘텐츠는 `main`에 push하기 전에 정확한 미리보기에 명시적 승인을 받아야 한다. 수동 실행도 유지되며, Actions의 `Deploy YBrary to GitHub Pages`에서 `Run workflow`를 누르고 `main`을 선택해 실행할 수 있다.
 
 ## 기존 Supabase 원격 게시 도구
 

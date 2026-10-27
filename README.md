@@ -75,7 +75,7 @@ VITE_BASE_PATH=/y-brary/ pnpm preview
 
 프로덕션 사이트 주소는 빌드 전에 `VITE_SITE_URL`로 설정합니다. 빌드는 목록과 등록된 상세 경로마다 `index.html` 셸을 복사하고 `404.html`을 생성합니다. GitHub Pages에서 유효한 상세 주소를 직접 열거나 새로고침해도 앱을 불러올 수 있습니다. 각 셸의 콘텐츠 본문은 브라우저의 React가 렌더링하며, 페이지별 본문 HTML을 미리 만드는 SSG나 검색 엔진용 프리렌더링은 구현하지 않습니다.
 
-GitHub Pages 배포는 `.github/workflows/deploy-pages.yml`을 수동 실행합니다. 소스 반영만으로 배포되지는 않습니다. 워크플로는 Node.js 24와 pnpm 11로 의존성을 설치하고 린트·타입 검사·테스트·빌드 후 `dist/`만 게시합니다. 저장소 경로는 `/y-brary/`이며 검색 엔진 색인은 기본적으로 차단합니다. 실제 Pages 활성화와 원격 콘텐츠 변경은 대상과 정확한 미리보기를 확인하고 승인한 뒤 진행합니다.
+GitHub Pages 배포는 `main` 브랜치에 push하면 `.github/workflows/deploy-pages.yml`이 자동 실행됩니다. GitHub Actions의 `Run workflow`로 수동 실행할 수도 있습니다. 워크플로는 Node.js 24와 pnpm 11로 의존성을 설치하고 린트·타입 검사·테스트·빌드가 통과하면 `dist/`만 게시합니다. 저장소 경로는 `/y-brary/`이며 검색 엔진 색인은 기본적으로 차단합니다. 공개 콘텐츠는 정확한 미리보기에 명시적 승인을 받은 뒤 `main`에 push합니다. 실제 Pages 활성화도 대상과 승인을 확인한 뒤 진행합니다.
 
 ## 기존 원격 게시 도구
 
