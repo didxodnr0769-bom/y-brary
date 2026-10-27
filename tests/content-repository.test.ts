@@ -65,6 +65,9 @@ describe("static content repository", () => {
       { slug: "the-sorrows-of-young-werther", isSample: false },
       { slug: "the-martian", isSample: false },
       { slug: "project-hail-mary", isSample: false },
+      { slug: "get-out-of-my-head", isSample: false },
+      { slug: "ebs-capitalism", isSample: false },
+      { slug: "harvard-debate-class", isSample: false },
     ]);
     await expect(listReviews("course")).toEqual([]);
     await expect(getReviewBySlug("book", "book-review-example-one")).toBeNull();

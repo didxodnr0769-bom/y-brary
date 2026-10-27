@@ -49,7 +49,7 @@ export function ReviewListPage({ kind, query }: { kind: ReviewKind; query: strin
         <SearchForm action={pageCopy.action} query={query} label={`${pageCopy.label} 제목 검색`} />
       )}
       {reviews.length > 0 ? (
-        <section className="review-grid" aria-label={kind === "book" ? "책 리뷰 목록" : "강의 기록 목록"}>
+        <section className={kind === "book" ? "review-grid book-grid" : "review-grid"} aria-label={kind === "book" ? "책 리뷰 목록" : "강의 기록 목록"}>
           {reviews.map((review, index) => (
             <ReviewCard key={review.id} review={review} eager={index === 0} />
           ))}

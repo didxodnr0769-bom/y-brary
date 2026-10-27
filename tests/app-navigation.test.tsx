@@ -23,7 +23,7 @@ describe("React 앱 탐색", () => {
     expect(screen.getByRole("heading", { name: "젊은 베르테르의 슬픔" })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "프로젝트 헤일메리" })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "YBrary" })).toBeTruthy();
-    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(9);
+    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(12);
   });
 
   it("프로젝트 전용 목록과 검색은 /projects에 유지한다", () => {

@@ -446,6 +446,10 @@ input {
   gap: 34px 16px;
 }
 
+.book-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .learning-note-list {
   display: grid;
   gap: 18px;
