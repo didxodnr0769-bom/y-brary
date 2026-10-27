@@ -2,6 +2,39 @@ import { projectSchema, reviewSchema } from "@/lib/content/schema";
 
 export const projects = projectSchema.array().parse([
   {
+    id: "project-worstcompare",
+    slug: "worstcompare",
+    title: "WorstCompare",
+    summary: "두 폴더의 차이를 나란히 비교하고, 필요한 변경 블록만 골라 반영하는 macOS용 파일 비교 도구.",
+    description: "WorstCompare는 프로젝트 원본과 수정본, 서로 다른 작업 폴더, 백업과 현재 파일을 나란히 비교하는 데스크톱 앱입니다. 폴더 트리에서 변경되거나 한쪽에만 있는 파일을 찾고, 파일 상세 화면에서 텍스트의 차이를 줄 단위로 확인할 수 있습니다.\n\n필요한 변경 블록만 선택해 왼쪽 또는 오른쪽에 적용한 뒤 저장할 수 있습니다. 파일·폴더의 양방향 복사와 삭제, 실행 취소·다시 실행, 변경 위치를 보여주는 미니맵도 제공합니다. 파일 비교와 변경 처리는 로컬에서 수행합니다.\n\n자주 비교하는 두 폴더의 경로와 제외 패턴은 이름 있는 프리셋으로 저장해 다시 불러올 수 있습니다. 다크·라이트 테마를 지원하며, 비교 기록과 설정은 앱 저장소에 보관합니다.\n\nElectron·React·TypeScript·Vite로 구현했으며, 현재 패키징 대상은 macOS 13 이상을 사용하는 Apple Silicon Mac입니다.\n\n이미지는 촬영용 가상 프로젝트로 준비한 실제 앱 화면이며, 개인 작업 경로나 실제 프로젝트 데이터는 포함하지 않습니다.",
+    thumbnail: {
+      url: "/content/projects/worstcompare/folder-comparison.webp",
+      alt: "가상 쇼핑몰 프로젝트의 두 폴더를 나란히 비교하며 변경·추가·삭제된 파일을 보여주는 WorstCompare 화면"
+    },
+    screenshots: [
+      {
+        id: "worstcompare-file-diff",
+        url: "/content/projects/worstcompare/file-diff.webp",
+        alt: "가상 설정 파일의 줄 단위 차이와 변경 블록을 반대편에 적용하는 버튼을 보여주는 WorstCompare 화면",
+        caption: "필요한 변경 블록을 선택해 반영하는 파일 상세 비교",
+        sortOrder: 0
+      },
+      {
+        id: "worstcompare-comparison-presets",
+        url: "/content/projects/worstcompare/comparison-presets.webp",
+        alt: "가상 문서 프로젝트의 왼쪽·오른쪽 폴더 경로와 제외 패턴을 프리셋으로 저장하는 WorstCompare 화면",
+        caption: "비교 경로와 제외 패턴을 함께 저장하는 프리셋",
+        sortOrder: 1
+      }
+    ],
+    githubUrl: "https://github.com/didxodnr0769-bom/WorstCompare",
+    liveUrl: null,
+    tags: ["macOS", "Electron", "React", "TypeScript", "파일 비교", "개발 도구"],
+    period: null,
+    publishedAt: "2026-10-27",
+    isSample: false
+  },
+  {
     id: "project-deskmate",
     slug: "deskmate",
     title: "DeskMate",
