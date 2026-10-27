@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
+import { MarkdownContent } from "@/components/markdown-content";
 
 import { formatDate } from "@/lib/content/format";
 import { getLearningNoteBySlug } from "@/lib/content/repository";
@@ -35,7 +35,7 @@ export function LearningNoteDetailPage({ slug }: { slug: string }) {
           <h2 id="learning-note-title">학습 내용</h2>
           <span>Learning note</span>
         </div>
-        <div className="learning-markdown"><ReactMarkdown>{note.body}</ReactMarkdown></div>
+        <MarkdownContent>{note.body}</MarkdownContent>
       </section>
     </article>
   );

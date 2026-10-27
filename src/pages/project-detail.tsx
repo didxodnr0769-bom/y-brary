@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { NotFoundPage } from "@/pages/not-found";
 
 import { ProjectGallery, type ProjectGalleryImage } from "@/components/project-gallery";
+import { MarkdownContent } from "@/components/markdown-content";
 import { formatDateRange } from "@/lib/content/format";
 import { getProjectBySlug } from "@/lib/content/repository";
 
@@ -75,13 +76,7 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
 
       <ProjectGallery images={galleryImages} />
 
-      <div className="detail-copy">
-        <div className="detail-description">
-          {project.description.split("\n\n").map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
-      </div>
+      <MarkdownContent>{project.description}</MarkdownContent>
     </article>
   );
 }

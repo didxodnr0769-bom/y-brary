@@ -2,6 +2,7 @@ import { lazy, Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { ContentImage } from "@/components/content-image";
+import { MarkdownContent } from "@/components/markdown-content";
 import { formatDate } from "@/lib/content/format";
 import type { Review } from "@/lib/content/schema";
 
@@ -103,7 +104,7 @@ export function ReviewDetail({ review }: { review: Review }) {
           <h2 id="review-note-title">{copy.note}</h2>
           <span>Review note</span>
         </div>
-        <p className="review-body">{review.body}</p>
+        <MarkdownContent>{review.body}</MarkdownContent>
       </section>
       {coverOpen && review.cover ? (
         <Suspense fallback={null}>
