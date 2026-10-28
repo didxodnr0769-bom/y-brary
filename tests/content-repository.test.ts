@@ -14,6 +14,7 @@ describe("static content repository", () => {
     const projects = await listProjects();
 
     expect(projects.map((project) => project.slug)).toEqual([
+      "my-brush",
       "jev-playground",
       "worstcompare",
       "deskmate",

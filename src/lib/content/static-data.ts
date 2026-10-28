@@ -2,6 +2,57 @@ import { projectSchema, reviewSchema } from "@/lib/content/schema";
 
 export const projects = projectSchema.array().parse([
   {
+    id: "project-my-brush",
+    slug: "my-brush",
+    title: "My Brush",
+    summary: "보고 있는 화면 위에 선과 사각형, 짧은 설명을 더하고 다시 작업으로 돌아오는 데스크톱 필기 앱.",
+    description: `My Brush는 다른 앱 위에 투명한 필기 화면을 띄우는 데스크톱 앱입니다. 웹페이지, 문서, 발표 자료를 보며 선으로 강조하고 사각형으로 영역을 짚거나 짧은 설명을 덧붙일 수 있습니다. 화면 공유와 문서 검토 중 지금 보고 있는 화면에서 설명을 이어갈 수 있도록 만들었습니다.
+
+## 주요 기능
+
+- 펜의 색상과 굵기를 조절해 자유롭게 필기하고, 사각형으로 필요한 영역을 표시합니다.
+- 여러 줄의 텍스트를 넣고 내용과 색상, 글자 크기를 다시 편집할 수 있습니다.
+- Control+드래그로 선택한 영역에 닿은 획·사각형·텍스트를 오브젝트 단위로 지웁니다.
+- 전역 단축키나 메뉴로 필기를 켜고 끄며 원래 앱의 작업으로 돌아갑니다. 숨긴 필기는 다시 켜면 돌아옵니다.
+- 필기 켜기·끄기와 도구 전환 단축키를 원하는 조합으로 바꿀 수 있습니다.
+
+## 실행과 데이터
+
+Electron과 JavaScript로 구현했으며, macOS에서 실행하고 패키징한 앱입니다. 계정이나 서버 연결 없이 로컬에서 동작하며, 색상·굵기·단축키 설정을 기기에 저장합니다.
+
+필기 내용은 실행 중에만 유지되고 앱을 종료하면 사라집니다. 파일 저장·내보내기, 실행 취소·다시 실행, 기기 간 동기화는 현재 제공하지 않습니다.
+
+## 화면 안내
+
+이미지는 macOS에서 패키징한 My Brush 0.2.2의 실제 필기 레이어와 단축키 설정 화면입니다. 투명한 부분에 옅은 단색 배경을 합성하고 필요한 영역을 잘랐으며, 개인 바탕화면이나 업무 자료는 포함하지 않습니다.`,
+    thumbnail: {
+      url: "/content/projects/my-brush/overview.webp",
+      alt: "펜·사각형·텍스트 도구 막대와 굵은 초록 곡선, 가는 잉크 곡선, 오렌지 강조선을 보여주는 My Brush 필기 화면"
+    },
+    screenshots: [
+      {
+        id: "my-brush-area-delete",
+        url: "/content/projects/my-brush/area-delete.webp",
+        alt: "Control+드래그의 점선 선택 영역에 닿은 두 강조선 전체가 삭제 대상으로 표시된 My Brush 화면",
+        caption: "선택 영역에 닿은 오브젝트 전체를 지우는 영역 삭제 미리보기",
+        sortOrder: 0
+      },
+      {
+        id: "my-brush-shortcuts",
+        url: "/content/projects/my-brush/shortcuts.webp",
+        alt: "필기 켜기·끄기, 펜·사각형·텍스트 전환과 선 굵기 조절 키를 변경하는 My Brush 단축키 설정 화면",
+        caption: "전역 토글과 도구 전환 키를 바꾸는 단축키 설정",
+        sortOrder: 1
+      }
+    ],
+    githubUrl: "https://github.com/didxodnr0769-bom/my-brush",
+    liveUrl: null,
+    tags: ["macOS", "Electron", "JavaScript", "화면 필기", "데스크톱 앱", "생산성"],
+    period: null,
+    publishedAt: "2026-10-28",
+    isSample: false
+  },
+  {
     id: "project-jev-playground",
     slug: "jev-playground",
     title: "Jev Playground",
