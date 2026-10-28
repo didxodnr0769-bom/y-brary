@@ -88,7 +88,9 @@ describe("static content repository", () => {
     await expect(listReviews("course")).toEqual([]);
     await expect(getReviewBySlug("book", "book-review-example-one")).toBeNull();
     await expect(getReviewBySlug("course", "missing-course")).toBeNull();
-    await expect(listLearningNotes()).toEqual([]);
+    await expect(listLearningNotes()).toMatchObject([
+      { slug: "authentication-authorization-and-session", isSample: false },
+    ]);
     await expect(getLearningNoteBySlug("missing-note")).toBeNull();
   });
 });
