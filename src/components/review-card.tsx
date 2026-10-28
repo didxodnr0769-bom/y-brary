@@ -22,7 +22,7 @@ export function ReviewCard({ eager = false, review }: { eager?: boolean; review:
             alt={review.cover?.alt ?? "강의 이미지 미첨부"}
             fill
             loading={eager ? "eager" : "lazy"}
-            sizes="(max-width: 640px) 50vw, (max-width: 760px) 33vw, (max-width: 1200px) 25vw, 220px"
+            sizes="(max-width: 640px) 50vw, (max-width: 900px) 33vw, 25vw"
           />
         </div>
         <div className="card-body">
@@ -39,6 +39,10 @@ export function ReviewCard({ eager = false, review }: { eager?: boolean; review:
             </span>
           </div>
           <p className="card-summary">{review.summary}</p>
+          <div className="card-footer">
+            <span className="card-read-label">{review.kind === "book" ? "독서 기록" : "수강 기록"}</span>
+            <span className="card-open" aria-hidden="true">→</span>
+          </div>
         </div>
       </Link>
     </article>

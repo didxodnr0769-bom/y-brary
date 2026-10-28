@@ -19,9 +19,12 @@ export function ProjectCard({ eager = false, project }: { eager?: boolean; proje
           />
         </div>
         <div className="card-body">
-          {project.isSample ? <div className="card-meta-row"><span className="sample-badge">Sample</span></div> : null}
+          <div className="card-meta-row"><span className="kind-badge">{project.isSample ? "Sample 프로젝트" : "프로젝트"}</span></div>
           <h2 className="card-title">{project.title}</h2>
           <p className="card-summary">{project.summary}</p>
+          <div className="card-footer">
+            <span className="card-tags">{project.tags.slice(0, 2).map((tag) => <span className="topic-badge" key={tag}>{tag}</span>)}</span>
+          </div>
         </div>
       </Link>
     </article>

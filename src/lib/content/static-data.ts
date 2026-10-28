@@ -425,8 +425,26 @@ JavaScript ES Modules, HTML, 반응형 CSS, SVG 조표와 CSS 기반 피아노 �
 ## 콘텐츠 관리와 화면
 
 현재 콘텐츠는 저장소의 정적 데이터로 관리하며, 반응형 화면과 라이트·다크 테마를 지원합니다.`,
-    thumbnail: null,
-    screenshots: [],
+    thumbnail: {
+      url: "/content/projects/ybrary/overview.webp",
+      alt: "프로젝트 검색창과 My Brush·Jev Playground·WorstCompare 카드, 왼쪽 탐색 메뉴를 보여주는 YBrary 프로젝트 목록 화면"
+    },
+    screenshots: [
+      {
+        id: "ybrary-project-detail",
+        url: "/content/projects/ybrary/project-detail.webp",
+        alt: "My Brush를 예시로 제목·태그·한 줄 소개·GitHub 링크와 이미지 갤러리를 보여주는 YBrary 프로젝트 상세 화면",
+        caption: "프로젝트의 소개와 이미지 갤러리를 확인하는 상세 화면",
+        sortOrder: 0
+      },
+      {
+        id: "ybrary-projects-dark",
+        url: "/content/projects/ybrary/projects-dark.webp",
+        alt: "어두운 배경에서 프로젝트 검색창과 My Brush·Jev Playground·WorstCompare 카드를 보여주는 YBrary 다크 테마 목록 화면",
+        caption: "다크 테마로 전환한 프로젝트 목록",
+        sortOrder: 1
+      }
+    ],
     githubUrl: null,
     liveUrl: null,
     tags: ["포트폴리오", "와이브러리", "리뷰 사이트"],

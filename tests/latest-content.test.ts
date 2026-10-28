@@ -37,4 +37,12 @@ describe("통합 최신 기록", () => {
     expect(entries.find((entry) => entry.kind === "note")?.image).toBeNull();
     expect(entries.find((entry) => entry.kind === "project")?.image).toBeNull();
   });
+
+  it("통합 태그 필터는 제목 부분 일치와 구분해 실제 태그로만 필터링한다", () => {
+    expect(listLatestContent("", { tag: "React" }).map((entry) => entry.kind)).toEqual(["project"]);
+    expect(listLatestContent("", { tag: "SF" }).map((entry) => entry.kind)).toEqual(["book"]);
+    expect(listLatestContent("", { tag: "Type" })).toEqual([]);
+    expect(listLatestContent("프로젝트", { tag: "React" })).toHaveLength(1);
+    expect(listLatestContent("책", { tag: "React" })).toEqual([]);
+  });
 });

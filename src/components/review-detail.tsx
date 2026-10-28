@@ -18,10 +18,20 @@ export function ReviewDetail({ review }: { review: Review }) {
   const [coverOpen, setCoverOpen] = useState(false);
 
   return (
-    <article className="detail-page">
-      <Link className="back-link" to={copy.collection}>
-        <span aria-hidden="true">←</span> {copy.label} 목록
-      </Link>
+    <article className="detail-page review-detail">
+      <div className="detail-masthead">
+        <Link className="back-link" to={copy.collection}>
+          <span aria-hidden="true">←</span> {copy.label} 목록
+        </Link>
+        <header className="detail-header">
+          <div className="detail-kicker">
+            <span className="kind-badge">{review.kind}</span>
+            {review.isSample ? <span className="sample-badge">Sample</span> : null}
+          </div>
+          <h1 className="detail-title">{review.title}</h1>
+          <p className="detail-summary">{review.summary}</p>
+        </header>
+      </div>
 
       <div className="review-detail-layout">
         <div className="review-cover">
@@ -42,60 +52,52 @@ export function ReviewDetail({ review }: { review: Review }) {
         </div>
 
         <div className="review-content">
-          <header className="detail-header">
-            <div className="detail-kicker">
-              <span className="kind-badge">{review.kind}</span>
-              {review.isSample ? <span className="sample-badge">Sample</span> : null}
+          <dl className="review-facts">
+            <div>
+              <dt>유형</dt>
+              <dd>{copy.type}</dd>
             </div>
-            <h1 className="detail-title">{review.title}</h1>
-            <p className="detail-summary">{review.summary}</p>
-            <dl className="review-facts">
+            <div>
+              <dt>{copy.creator}</dt>
+              <dd>{review.kind === "book" ? (
+                <Link className="book-collection-link" to={`/books?${new URLSearchParams({ q: review.creator })}`}>{review.creator}</Link>
+              ) : review.creator}</dd>
+            </div>
+            {review.kind === "book" && review.category ? (
               <div>
-                <dt>유형</dt>
-                <dd>{copy.type}</dd>
+                <dt>카테고리</dt>
+                <dd><Link className="book-collection-link" to={`/books?${new URLSearchParams({ category: review.category })}`}>{review.category}</Link></dd>
               </div>
+            ) : null}
+            {review.kind === "book" ? (
               <div>
-                <dt>{copy.creator}</dt>
-                <dd>{review.kind === "book" ? (
-                  <Link className="book-collection-link" to={`/books?${new URLSearchParams({ author: review.creator })}`}>{review.creator}</Link>
-                ) : review.creator}</dd>
+                <dt>독서 시작일</dt>
+                <dd>{review.startedOn ? formatDate(review.startedOn) : "미기록"}</dd>
               </div>
-              {review.kind === "book" && review.category ? (
-                <div>
-                  <dt>카테고리</dt>
-                  <dd><Link className="book-collection-link" to={`/books?${new URLSearchParams({ category: review.category })}`}>{review.category}</Link></dd>
-                </div>
-              ) : null}
-              {review.kind === "book" ? (
-                <div>
-                  <dt>독서 시작일</dt>
-                  <dd>{review.startedOn ? formatDate(review.startedOn) : "미기록"}</dd>
-                </div>
-              ) : null}
+            ) : null}
+            <div>
+              <dt>{copy.date}</dt>
+              <dd>{formatDate(review.consumedOn)}</dd>
+            </div>
+            {review.kind === "book" && review.readingSource ? (
               <div>
-                <dt>{copy.date}</dt>
-                <dd>{formatDate(review.consumedOn)}</dd>
+                <dt>읽은 곳</dt>
+                <dd>{review.readingSource}</dd>
               </div>
-              {review.kind === "book" && review.readingSource ? (
-                <div>
-                  <dt>읽은 곳</dt>
-                  <dd>{review.readingSource}</dd>
-                </div>
-              ) : null}
+            ) : null}
+            <div>
+              <dt>별점</dt>
+              <dd className="rating" aria-label={`5점 만점에 ${review.rating}점`}>
+                {review.rating} / 5
+              </dd>
+            </div>
+            {review.kind === "course" && review.platform ? (
               <div>
-                <dt>별점</dt>
-                <dd className="rating" aria-label={`5점 만점에 ${review.rating}점`}>
-                  {review.rating} / 5
-                </dd>
+                <dt>플랫폼</dt>
+                <dd>{review.platform}</dd>
               </div>
-              {review.kind === "course" && review.platform ? (
-                <div>
-                  <dt>플랫폼</dt>
-                  <dd>{review.platform}</dd>
-                </div>
-              ) : null}
-            </dl>
-          </header>
+            ) : null}
+          </dl>
         </div>
       </div>
 

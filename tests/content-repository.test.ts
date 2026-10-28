@@ -40,6 +40,20 @@ describe("static content repository", () => {
     await expect(listProjects("리뷰 사이트")).toMatchObject([{ slug: "ybrary" }]);
   });
 
+  it("프로젝트 태그 필터는 정확히 일치하며 검색어와 함께 적용한다", () => {
+    expect(listProjects("", { tag: "macOS" })).toHaveLength(4);
+    expect(listProjects("", { tag: "mac" })).toEqual([]);
+    expect(listProjects("brush", { tag: "macOS" }).map((project) => project.slug)).toEqual(["my-brush"]);
+    expect(listProjects("brush", { tag: "React" })).toEqual([]);
+  });
+
+  it("책 검색창에서 제목과 저자 이름 일부를 모두 검색한다", () => {
+    expect(listReviews("book", "괴테").map((book) => book.slug)).toEqual(["the-sorrows-of-young-werther"]);
+    expect(listReviews("book", "  앤디 위어  ")).toHaveLength(2);
+    expect(listReviews("book", "헤일메리").map((book) => book.slug)).toEqual(["project-hail-mary"]);
+    expect(listReviews("book", "앤디 위어", { category: "고전소설" })).toEqual([]);
+  });
+
   it("slug로 프로젝트를 조회하고 없는 항목은 null을 반환한다", async () => {
     await expect(getProjectBySlug("ybrary")).toMatchObject({
       title: "YBrary",

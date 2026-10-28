@@ -18,6 +18,15 @@ export function MenuIcon({ className = "button-icon" }: IconProps) {
   );
 }
 
+export function SearchIcon({ className = "button-icon" }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path d="m15.5 15.5 5 5" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
 export function ThemeIcon({ className = "button-icon" }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
