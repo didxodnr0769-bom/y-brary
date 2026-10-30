@@ -89,6 +89,7 @@ describe("static content repository", () => {
     await expect(getReviewBySlug("book", "book-review-example-one")).toBeNull();
     await expect(getReviewBySlug("course", "missing-course")).toBeNull();
     await expect(listLearningNotes()).toMatchObject([
+      { slug: "no-silver-bullet", isSample: false },
       { slug: "authentication-authorization-and-session", isSample: false },
       { slug: "s3-basics-and-static-hosting", isSample: false },
     ]);
