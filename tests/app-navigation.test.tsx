@@ -39,7 +39,7 @@ describe("React 앱 탐색", () => {
     expect(screen.getByRole("heading", { name: "Major Scale Lab" })).toBeTruthy();
     expect(screen.queryByRole("heading", { name: "프로젝트 헤일메리" })).toBeNull();
     fireEvent.click(screen.getByRole("link", { name: "초기화" }));
-    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(8);
+    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(9);
   });
 
   it("프로젝트 태그와 검색어를 함께 적용하고 초기화로 두 조건을 해제한다", () => {

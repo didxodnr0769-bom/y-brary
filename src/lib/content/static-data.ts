@@ -2,6 +2,57 @@ import { projectSchema, reviewSchema } from "@/lib/content/schema";
 
 export const projects = projectSchema.array().parse([
   {
+    id: "project-portfolio-studies",
+    slug: "portfolio-studies",
+    title: "Portfolio Studies",
+    summary: "서로 다른 배치와 움직임으로 사진을 보여주는 13개 포트폴리오 시안 사이트.",
+    description: `Portfolio Studies는 사진작가 포트폴리오를 여러 배치와 움직임으로 구현한 시안 사이트입니다. 각 시안을 열어 사진을 탐색할 수 있습니다.
+
+## 열세 가지 시안
+
+매거진형 Editorial, 가로 사진 띠 Filmstrip, 사진 인덱스 Contact sheet, 전체 화면 전시 Exhibition, 타이포 중심 Living index, 두 장의 사진을 마주 놓은 Diptych를 제공합니다.
+
+작업대를 움직이는 Photo desk, 책장을 넘기는 Photobook, 사진을 회전시키는 Orbit, 포스터형 Raw, 색면 중심 Color field, 종이 앨범 Scrapbook, 사진 창을 펼치는 Shutters도 시안 목록에서 열어볼 수 있습니다.
+
+## 서로 다른 탐색 경험
+
+- Photo desk는 드래그와 확대·축소로 사진이 놓인 공간을 탐색합니다.
+- Photobook은 책장 넘김과 목차 이동, 사진 상세 보기를 제공합니다.
+- Orbit은 사진을 회전해 선택하고 인덱스와 상세 화면으로 작업을 살펴봅니다.
+
+## 구현 및 화면 안내
+
+각 시안은 HTML·CSS·JavaScript로 독립 실행되며, Node.js로 정적 배포 파일을 만들고 Vercel에 게시합니다.
+
+이미지는 공개된 시안 사이트와 Photobook·Orbit 시안에서 촬영한 화면입니다. 사진은 [Lorem Picsum](https://picsum.photos/)에서 제공하는 예시 이미지이며, 스튜디오명과 작업명도 디자인 검토용 예시입니다. 실제 촬영 실적이나 고객 정보를 뜻하지 않습니다.`,
+    thumbnail: {
+      url: "/content/projects/portfolio-studies/overview.webp",
+      alt: "13개 포트폴리오 시안의 미리보기 중 Editorial·Filmstrip·Contact sheet를 나란히 보여주는 Portfolio Studies 시안 목록 화면"
+    },
+    screenshots: [
+      {
+        id: "portfolio-studies-photobook",
+        url: "/content/projects/portfolio-studies/photobook.webp",
+        alt: "예시 하이힐과 카메라 사진을 펼친 책의 양쪽 페이지에 배치한 Photobook 시안 화면",
+        caption: "책장을 넘기며 사진을 탐색하는 Photobook 시안",
+        sortOrder: 0
+      },
+      {
+        id: "portfolio-studies-orbit",
+        url: "/content/projects/portfolio-studies/orbit.webp",
+        alt: "예시 하이힐 사진을 중심으로 풍경·카메라·인물 사진이 입체적으로 둘러선 Orbit 시안 화면",
+        caption: "사진을 회전시키며 고르는 입체 캐러셀 Orbit 시안",
+        sortOrder: 1
+      }
+    ],
+    githubUrl: null,
+    liveUrl: "https://portfolio-studies.vercel.app/",
+    tags: ["포트폴리오", "UI 디자인", "인터랙션", "HTML", "CSS", "JavaScript", "Vercel"],
+    period: null,
+    publishedAt: "2026-10-30",
+    isSample: false
+  },
+  {
     id: "project-my-brush",
     slug: "my-brush",
     title: "My Brush",
