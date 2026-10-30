@@ -553,7 +553,7 @@ JavaScript ES Modules, HTML, 반응형 CSS, SVG 조표와 CSS 기반 피아노 �
     ],
     githubUrl: null,
     liveUrl: null,
-    tags: ["포트폴리오", "와이브러리", "리뷰 사이트"],
+    tags: ["포트폴리오", "리뷰 사이트"],
     period: null,
     publishedAt: "2026-08-06",
     isSample: false,

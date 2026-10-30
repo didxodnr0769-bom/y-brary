@@ -6,6 +6,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { App } from "@/app";
 import { listReviews } from "@/lib/content/repository";
+import { openBookTransition } from "@/lib/book-transition";
+
+vi.mock("@/lib/book-transition", () => ({ openBookTransition: vi.fn((_image, navigate) => { navigate(); return Promise.resolve(); }) }));
 
 vi.mock("@/lib/content/static-data", () => {
   const common = {
@@ -35,9 +38,25 @@ function renderAt(path: string) {
 }
 
 beforeEach(() => { window.scrollTo = vi.fn(); });
-afterEach(cleanup);
+afterEach(() => { cleanup(); vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
 describe("책 분류 탐색", () => {
+  it("책 표지 전환을 실행하고 움직임 줄이기에서는 일반 이동한다", () => {
+    vi.stubGlobal("matchMedia", vi.fn(() => ({ matches: false })));
+    Object.defineProperty(Element.prototype, "animate", { configurable: true, value: vi.fn() });
+    const view = render(<MemoryRouter initialEntries={["/books"]} useTransitions={false}><App /></MemoryRouter>);
+    const image = within(screen.getByRole("link", { name: /테스트 고전 기록/ })).getByRole("img");
+    Object.defineProperties(image, { complete: { value: true }, naturalWidth: { value: 300 } });
+    fireEvent.click(screen.getByRole("link", { name: /테스트 고전 기록/ }));
+    expect(openBookTransition).toHaveBeenCalledOnce();
+    view.unmount();
+    vi.stubGlobal("matchMedia", vi.fn(() => ({ matches: true })));
+    render(<MemoryRouter initialEntries={["/books"]} useTransitions={false}><App /></MemoryRouter>);
+    fireEvent.click(screen.getByRole("link", { name: /테스트 고전 기록/ }));
+    expect(screen.getByRole("heading", { name: "테스트 고전 기록", level: 1 })).toBeTruthy();
+    expect(openBookTransition).toHaveBeenCalledOnce();
+    delete (Element.prototype as unknown as { animate?: unknown }).animate;
+  });
   it("제목과 저자 부분 검색을 카테고리 조건과 함께 적용한다", () => {
     expect(listReviews("book", "  테스트 작가  ", { category: "고전소설" }).map((book) => book.slug)).toEqual(["book-a"]);
     expect(listReviews("book", "작가")).toHaveLength(4);

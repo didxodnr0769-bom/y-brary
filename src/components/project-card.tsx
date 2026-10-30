@@ -20,7 +20,7 @@ export function ProjectCard({ eager = false, project }: { eager?: boolean; proje
           />
         </div>
         <div className="card-body">
-          <div className="card-meta-row"><span className="kind-badge">{project.isSample ? "Sample 프로젝트" : "프로젝트"}</span></div>
+          {project.isSample ? <div className="card-meta-row"><span className="sample-badge">Sample</span></div> : null}
           <h2 className="card-title">{project.title}</h2>
           <p className="card-summary">{project.summary}</p>
           <div className="card-footer">

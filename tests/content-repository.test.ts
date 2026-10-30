@@ -60,7 +60,7 @@ describe("static content repository", () => {
     await expect(getProjectBySlug("ybrary")).toMatchObject({
       title: "YBrary",
       githubUrl: null,
-      tags: ["포트폴리오", "와이브러리", "리뷰 사이트"],
+      tags: ["포트폴리오", "리뷰 사이트"],
     });
     await expect(getProjectBySlug("major-scale-lab")).toMatchObject({
       title: "Major Scale Lab",

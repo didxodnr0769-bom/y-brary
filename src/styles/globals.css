@@ -762,6 +762,17 @@ input {
   font-family: var(--font-maplestory), sans-serif;
   font-weight: 700;
 }
+.rating-stars {
+  font-family: sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.book-author {
+  color: var(--foreground);
+  font-weight: 700;
+}
 
 .empty-state {
   display: grid;
@@ -1211,6 +1222,33 @@ input {
   cursor: zoom-in;
   color: inherit;
 }
+
+.book-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background: rgba(17, 23, 34, 0.72);
+}
+.book-transition-book {
+  position: fixed;
+  transform-origin: top left;
+  perspective: 1200px;
+}
+.book-transition-page, .book-transition-cover, .book-transition-front, .book-transition-inside {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px 8px 8px 3px;
+}
+.book-transition-page, .book-transition-inside {
+  background: #fff;
+  box-shadow: inset 12px 0 20px rgba(0, 0, 0, .09), 0 12px 30px rgba(0, 0, 0, .3);
+}
+.book-transition-cover { transform-origin: left center; transform-style: preserve-3d; }
+.book-transition-front { object-fit: contain; backface-visibility: hidden; background: var(--surface-strong); }
+.book-transition-inside { transform: rotateY(180deg); backface-visibility: hidden; }
 
 .review-detail-layout {
   display: grid;
