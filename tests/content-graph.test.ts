@@ -104,7 +104,7 @@ describe("기록과 주제 그래프", () => {
       { id: "category:project", label: "프로젝트", degree: 1 },
       { id: "category:book", label: "책", degree: 1 },
       { id: "category:course", label: "강의 기록", degree: 1 },
-      { id: "category:note", label: "학습 정리", degree: 1 },
+      { id: "category:note", label: "노트", degree: 1 },
     ]);
     for (const node of graph.nodes.filter((node) => node.kind === "record")) {
       const categories = graph.edges.filter((edge) => edge.source === node.id && edge.target.startsWith("category:"));

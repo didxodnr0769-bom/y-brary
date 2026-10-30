@@ -38,7 +38,7 @@ describe("학습 콘텐츠 화면", () => {
     render(<MemoryRouter><LearningNoteDetailPage slug={note.slug} /></MemoryRouter>);
     expect(screen.getByRole("heading", { level: 1 }).textContent).toBe(note.title);
     expect(screen.getByText(/개념을 정리합니다/).textContent).toBe(note.body);
-    expect(screen.getByRole("link", { name: /학습 정리 목록/ }).getAttribute("href")).toBe("/notes");
+    expect(screen.getByRole("link", { name: /노트 목록/ }).getAttribute("href")).toBe("/notes");
     expect(screen.queryByText("별점")).toBeNull();
   });
 

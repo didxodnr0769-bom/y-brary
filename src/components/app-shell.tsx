@@ -10,7 +10,7 @@ const navItems = [
   { href: "/projects", label: "프로젝트" },
   { href: "/books", label: "책" },
   { href: "/courses", label: "강의 기록" },
-  { href: "/notes", label: "학습 정리" },
+  { href: "/notes", label: "노트" },
 ] as const;
 
 function isActivePath(pathname: string, href: (typeof navItems)[number]["href"]) {

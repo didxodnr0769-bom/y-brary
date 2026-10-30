@@ -65,7 +65,7 @@ const categories = [
   { kind: "project", label: "프로젝트" },
   { kind: "book", label: "책" },
   { kind: "course", label: "강의 기록" },
-  { kind: "note", label: "학습 정리" },
+  { kind: "note", label: "노트" },
 ] as const;
 
 describe("우주형 홈의 기록 탐색", () => {

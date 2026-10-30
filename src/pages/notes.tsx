@@ -12,14 +12,14 @@ export function LearningNotesPage({ query }: { query: string }) {
   return (
     <div className="page-stack">
       <ContentHeader
-        eyebrow="Learning Notes"
-        title="배운 것을 내 것으로"
-        description="새로 알게 된 개념과 직접 해본 실습, 다시 꺼내 볼 내용을 정리합니다."
+        eyebrow="Notes"
+        title="배움과 생각을 기록하다"
+        description="배운 것과 생각한 것, 대화하며 달라진 관점을 기록합니다."
         count={notes.length}
       />
-      <SearchForm action="/notes" query={query} label="학습 정리 제목·태그 검색" />
+      <SearchForm action="/notes" query={query} label="노트 제목·태그 검색" />
       {notes.length > 0 ? (
-        <section className="learning-note-list" aria-label="학습 정리 목록">
+        <section className="learning-note-list" aria-label="노트 목록">
           {notes.map((note) => (
             <article className="learning-note-card" key={note.id}>
               <Link className="card-link" to={`/notes/${note.slug}`}>
@@ -39,7 +39,7 @@ export function LearningNotesPage({ query }: { query: string }) {
           ))}
         </section>
       ) : (
-        <EmptyState query={query} label="학습 정리" />
+        <EmptyState query={query} label="노트" />
       )}
     </div>
   );

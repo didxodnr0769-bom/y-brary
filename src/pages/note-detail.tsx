@@ -13,11 +13,11 @@ export function LearningNoteDetailPage({ slug }: { slug: string }) {
     <article className="detail-page learning-note-detail">
       <div className="detail-masthead">
         <Link className="back-link" to="/notes">
-          <span aria-hidden="true">←</span> 학습 정리 목록
+          <span aria-hidden="true">←</span> 노트 목록
         </Link>
         <header className="detail-header">
           <div className="detail-kicker">
-            <span className="kind-badge">Learning note</span>
+            <span className="kind-badge">Note</span>
             {note.isSample ? <span className="sample-badge">Sample</span> : null}
           </div>
           <h1 className="detail-title">{note.title}</h1>
@@ -34,8 +34,8 @@ export function LearningNoteDetailPage({ slug }: { slug: string }) {
       </div>
       <section className="review-note-section" aria-labelledby="learning-note-title">
         <div className="section-heading">
-          <h2 id="learning-note-title">학습 내용</h2>
-          <span>Learning note</span>
+          <h2 id="learning-note-title">노트 내용</h2>
+          <span>Note</span>
         </div>
         <MarkdownContent>{note.body}</MarkdownContent>
       </section>

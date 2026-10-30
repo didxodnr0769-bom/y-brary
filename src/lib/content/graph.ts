@@ -20,7 +20,7 @@ const categories = [
   { kind: "project", label: "프로젝트", x: 0.25, y: 0.3 },
   { kind: "book", label: "책", x: 0.77, y: 0.35 },
   { kind: "course", label: "강의 기록", x: 0.72, y: 0.8 },
-  { kind: "note", label: "학습 정리", x: 0.25, y: 0.78 },
+  { kind: "note", label: "노트", x: 0.25, y: 0.78 },
 ] as const;
 
 function seed(value: string) {

@@ -22,7 +22,7 @@ function DetailRoute({ kind }: { kind: "project" | "book" | "course" | "note" })
   return <ReviewDetailPage kind={kind} slug={slug} />;
 }
 
-const titles: Record<string, string> = { "/": "홈", "/projects": "프로젝트", "/books": "책", "/courses": "강의 기록", "/notes": "학습 정리" };
+const titles: Record<string, string> = { "/": "홈", "/projects": "프로젝트", "/books": "책", "/courses": "강의 기록", "/notes": "노트" };
 
 function PageMetadata() {
   const { pathname } = useLocation();
@@ -35,7 +35,7 @@ function PageMetadata() {
       : collection === "notes" ? getLearningNoteBySlug(slug) : null;
     document.title = `${titles[path] ?? record?.title ?? "기록을 찾을 수 없음"} | YBrary`;
     const description = document.querySelector('meta[name="description"]');
-    description?.setAttribute("content", record?.summary ?? "프로젝트와 책, 강의 기록, 학습 정리를 모은 개인 아카이브 YBrary입니다.");
+    description?.setAttribute("content", record?.summary ?? "프로젝트와 책, 강의 기록, 노트를 모은 개인 아카이브 YBrary입니다.");
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]') ?? document.createElement("link");
     canonical.rel = "canonical";
     canonical.href = new URL(assetUrl(path), import.meta.env.VITE_SITE_URL || window.location.origin).href;

@@ -18,7 +18,7 @@ export function parseLearningNote(source: string, fileName: string): LearningNot
 export function parseLearningNotes(files: Record<string, string>) {
   const notes = Object.entries(files).map(([fileName, source]) => parseLearningNote(source, fileName));
   if (new Set(notes.map((note) => note.id)).size !== notes.length || new Set(notes.map((note) => note.slug)).size !== notes.length) {
-    throw new Error("학습 정리의 id와 slug는 고유해야 합니다.");
+    throw new Error("노트의 id와 slug는 고유해야 합니다.");
   }
   return notes;
 }

@@ -78,10 +78,10 @@ describe("React 앱 탐색", () => {
     expect(tags.getByRole("link", { name: /^React/ }).getAttribute("aria-current")).toBeNull();
   });
 
-  it("학습 정리 직접 접속과 없는 기록의 안내를 표시한다", () => {
+  it("노트 직접 접속과 없는 기록의 안내를 표시한다", () => {
     const view = render(<MemoryRouter initialEntries={["/notes"]}><App /></MemoryRouter>);
-    expect(screen.getByRole("heading", { name: "배운 것을 내 것으로" })).toBeTruthy();
-    expect(document.title).toBe("학습 정리 | YBrary");
+    expect(screen.getByRole("heading", { name: "배움과 생각을 기록하다" })).toBeTruthy();
+    expect(document.title).toBe("노트 | YBrary");
     view.unmount();
     render(<MemoryRouter initialEntries={["/courses/missing"]}><App /></MemoryRouter>);
     expect(screen.getByRole("heading", { name: "기록을 찾을 수 없습니다." })).toBeTruthy();
