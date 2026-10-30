@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
+import type { MouseEvent } from "react";
 import { NotFoundPage } from "@/pages/not-found";
 
 import { ProjectGallery, type ProjectGalleryImage } from "@/components/project-gallery";
 import { MarkdownContent } from "@/components/markdown-content";
+import { analytics } from "@/lib/analytics";
 import { formatDateRange } from "@/lib/content/format";
 import { getProjectBySlug } from "@/lib/content/repository";
 
 export function ProjectDetailPage({ slug }: { slug: string }) {
   const project = getProjectBySlug(slug);
   if (!project) return <NotFoundPage />;
+  function trackLink(event: MouseEvent<HTMLAnchorElement>, kind: "github" | "site", url: string) {
+    if (event.button === 0 || event.button === 1) analytics.projectLink(slug, kind, url);
+  }
   const galleryImages: ProjectGalleryImage[] = [
     ...(project.thumbnail
       ? [
@@ -62,12 +67,16 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
               {project.githubUrl || project.liveUrl ? (
                 <div className="detail-actions">
                   {project.githubUrl ? (
-                    <a className="external-link" href={project.githubUrl} target="_blank" rel="noreferrer">
+                    <a className="external-link" href={project.githubUrl} target="_blank" rel="noreferrer"
+                      onClick={(event) => trackLink(event, "github", project.githubUrl!)}
+                      onAuxClick={(event) => trackLink(event, "github", project.githubUrl!)}>
                       GitHub ↗
                     </a>
                   ) : null}
                   {project.liveUrl ? (
-                    <a className="external-link" href={project.liveUrl} target="_blank" rel="noreferrer">
+                    <a className="external-link" href={project.liveUrl} target="_blank" rel="noreferrer"
+                      onClick={(event) => trackLink(event, "site", project.liveUrl!)}
+                      onAuxClick={(event) => trackLink(event, "site", project.liveUrl!)}>
                       사이트 ↗
                     </a>
                   ) : null}

@@ -264,6 +264,7 @@ export function CosmicGraph({ graph, activeTag, activeKind, onSelectTopic, onSel
       <p>{!nodes.some((node) => node.kind === "record") ? "조건에 맞는 기록이 없습니다." : "연결된 주제가 없습니다."}</p><Link to="/">전체 기록 보기</Link>
     </div> : null}
     <a className="graph-font-notice" href={assetUrl("/notices/maplestory-font.txt")} target="_blank" rel="noreferrer" aria-label="메이플스토리 서체 저작권 안내" title="메이플스토리 서체 저작권 안내"><ControlIcon type="info" /></a>
+    <a className="graph-font-notice graph-analytics-notice" href={assetUrl("/notices/analytics.html")} target="_blank" rel="noreferrer">방문 통계 안내</a>
     <div className="graph-controls" role="group" aria-label="화면 조절">
       <button type="button" aria-label="확대" title="확대 (+)" onClick={() => zoomAt(1.25)} disabled={camera.zoom >= 6}><ControlIcon type="plus" /></button>
       <button type="button" aria-label="축소" title="축소 (−)" onClick={() => zoomAt(1 / 1.25)} disabled={camera.zoom <= 0.35}><ControlIcon type="minus" /></button>

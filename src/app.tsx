@@ -3,6 +3,7 @@ import { Route, Routes, useLocation, useParams } from "react-router-dom";
 
 import { AppShell } from "@/components/app-shell";
 import { ReviewListPage } from "@/components/review-list-page";
+import { analytics } from "@/lib/analytics";
 import { getLearningNoteBySlug, getProjectBySlug, getReviewBySlug } from "@/lib/content/repository";
 import { readSearchQuery } from "@/lib/content/search";
 import { assetUrl } from "@/lib/urls";
@@ -50,6 +51,7 @@ function PageMetadata() {
       ['meta[name="twitter:description"]', shareDescription],
     ]) document.querySelector(selector)?.setAttribute("content", value);
     window.scrollTo(0, 0);
+    analytics.pageView(path, document.title);
   }, [pathname]);
   return null;
 }

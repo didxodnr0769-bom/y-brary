@@ -44,6 +44,7 @@ jobs:
           VITE_BASE_PATH: /y-brary/
           VITE_SITE_URL: https://didxodnr0769-bom.github.io
           VITE_ENABLE_INDEXING: "false"
+          VITE_GA_MEASUREMENT_ID: ${{ vars.VITE_GA_MEASUREMENT_ID }}
       - name: Upload site
         uses: actions/upload-pages-artifact@v5.0.0
         with:

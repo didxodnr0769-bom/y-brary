@@ -83,6 +83,7 @@
 .graph-controls button:hover, .graph-font-notice:hover { border-color: rgb(233 138 96 / 65%); color: #ffa775; background: #213033; }
 .graph-controls button:disabled { opacity: 0.3; cursor: default; }
 .graph-font-notice { position: absolute; bottom: max(22px, env(safe-area-inset-bottom)); left: max(24px, env(safe-area-inset-left)); width: 32px; height: 32px; padding: 6px; border-color: transparent; background: transparent; color: #8d9d9d; }
+.graph-analytics-notice { width: auto; transform: translateX(36px); font-size: 12px; }
 .graph-empty { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; font-size: 14px; }
 .graph-empty p { margin: 0 0 16px; color: #c0ccc8; }
 .graph-empty a { color: #f1a47f; text-underline-offset: 5px; text-decoration: underline; }

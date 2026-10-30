@@ -110,6 +110,15 @@ YBrary는 개인 사이드 프로젝트, 책과 강의 기록, 배움과 생각�
 - Supabase 스키마와 원격 게시 도구는 기존 데이터베이스 전환 준비물이며 현재 앱 런타임에서는 사용하지 않는다. 기존 프로젝트·`book`/`film` 계약을 유지하므로 강의 기록·노트를 등록하는 도구로 사용할 수 없다.
 - 검색 엔진 색인은 `VITE_ENABLE_INDEXING=true`로 명시하기 전까지 차단한다.
 
+### 방문 통계
+
+- GA4 측정 ID는 `VITE_GA_MEASUREMENT_ID`로 설정한다. 유효한 `G-…` ID가 없으면 통계를 수집하지 않는다. 운영 빌드(`import.meta.env.PROD`)이며 접속 주소가 `VITE_SITE_URL`의 HTTPS origin 및 `VITE_BASE_PATH`의 운영 경로와 일치할 때만 활성화한다.
+- 첫 진입과 실제 pathname 전환에만 수동 `page_view`를 보낸다. 검색·필터·hash만 변경되면 조회를 추가하지 않으며 페이지·이전 페이지 URL의 query와 hash를 제거한다.
+- 프로젝트 상세의 GitHub·사이트 링크 두 종류만 수동 `click`으로 측정하며 `link_url`의 query와 hash도 제거한다. 검색어·필터 선택과 그래프 조작 이벤트를 별도로 수집하지 않는다.
+- 자동 페이지 조회를 코드에서 끄고 GA 웹 스트림의 향상된 측정 전체를 OFF로 설정해야 한다. 이 GA 설정을 마친 뒤 측정 ID를 배포 환경에 등록한다. Google 신호와 광고 개인화는 코드와 GA 설정에서 비활성화한다. GA 기본 `first_visit`, `session_start`, `user_engagement`와 기기 정보·쿠키 기반 식별은 남는다.
+- `?analytics=off`로 브라우저 `localStorage`에 `ybrary.analytics.disabled=1`을 저장해 본인 방문을 제외하고 `?analytics=on`으로 복원한다. 저장소 접근이 차단되면 현재 페이지에만 제외가 적용될 수 있다.
+- `/notices/analytics.html`에서 수집 범위와 방문 통계 제외 방법을 안내한다. 운영자 설정과 검증 절차는 루트 `README.md`를 따른다.
+
 ## 콘텐츠 운영 원칙
 
 - 사용자에게 확인받지 않은 개인 프로젝트·독서·수강·학습 사실이나 개인적인 견해, 날짜·별점·본문을 만들어 게시하지 않는다.
