@@ -89,7 +89,7 @@ describe("기록과 주제 그래프", () => {
     expect(categories.find((node) => node.id === "category:project")?.degree).toBe(10);
     expect(categories.find((node) => node.id === "category:book")?.degree).toBe(6);
     expect(categories.find((node) => node.id === "category:course")?.degree).toBe(0);
-    expect(categories.find((node) => node.id === "category:note")?.degree).toBe(3);
+    expect(categories.find((node) => node.id === "category:note")?.degree).toBe(4);
   });
 
   it("분류 노드의 건수는 실제 기록 수이며 종류가 다른 분류와 연결하지 않는다", () => {
