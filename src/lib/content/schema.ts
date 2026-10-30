@@ -8,7 +8,14 @@ const imageUrlSchema = z.string().refine((value) => value.startsWith("/") || URL
 export const imageAssetSchema = z.object({
   url: imageUrlSchema,
   alt: z.string().min(1).max(200),
+  sources: z.array(z.object({
+    url: imageUrlSchema,
+    width: z.number().int().positive(),
+  })).optional(),
 });
+
+export type ImageAsset = z.infer<typeof imageAssetSchema>;
+export type ImageSource = NonNullable<ImageAsset["sources"]>[number];
 
 export const projectScreenshotSchema = imageAssetSchema.extend({
   id: z.string().min(1),

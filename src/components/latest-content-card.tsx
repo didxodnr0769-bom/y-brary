@@ -19,7 +19,7 @@ export function LatestContentCard({ entry, order = 1, eager = false }: { entry: 
         </div>
         {hasMedia ? (
           <div className="journal-entry-image">
-            <ContentImage src={entry.image?.url} alt={entry.image?.alt ?? ""} fill loading={eager ? "eager" : "lazy"} sizes="(max-width: 640px) 28vw, 220px" />
+            <ContentImage src={entry.image?.url} sources={entry.image?.sources} alt={entry.image?.alt ?? ""} fill loading={eager ? "eager" : "lazy"} sizes="(max-width: 640px) 28vw, 220px" />
           </div>
         ) : null}
       </Link>

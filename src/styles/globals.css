@@ -948,7 +948,7 @@ input {
 }
 
 .gallery-slide-button img {
-  object-fit: contain;
+  object-fit: scale-down;
 }
 
 .gallery-slide-caption {
@@ -1185,6 +1185,10 @@ input {
 .gallery-lightbox-image img {
   object-fit: contain;
   user-select: none;
+}
+
+.gallery-lightbox[data-scale-down] .gallery-lightbox-image img {
+  object-fit: scale-down;
 }
 
 .gallery-lightbox-meta {

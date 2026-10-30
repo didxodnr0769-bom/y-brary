@@ -1,6 +1,61 @@
-import { projectSchema, reviewSchema } from "@/lib/content/schema";
+import { projectSchema, reviewSchema, type ImageSource } from "@/lib/content/schema";
+import { projectImageSources } from "@/lib/content/project-image-sources";
+
+function withProjectImageSources<T extends { url: string; sources?: ImageSource[] }>(image: T) {
+  return { ...image, sources: image.sources ?? projectImageSources[image.url] };
+}
 
 export const projects = projectSchema.array().parse([
+  {
+    id: "project-studio-boss",
+    slug: "studio-boss",
+    title: "Studio Boss",
+    summary: "사진과 영상을 원본 비율의 갤러리와 작업별 상세 화면으로 소개하는 반응형 포트폴리오 웹사이트.",
+    description: `Studio Boss는 사진과 영상으로 작업을 소개하는 포트폴리오 웹사이트입니다. 메뉴 아래에서 바로 갤러리가 시작되며, 사진의 원본 비율과 서로 다른 크기를 살려 작업을 둘러볼 수 있도록 구성했습니다.
+
+## 주요 기능
+
+- PC 4열·태블릿 2열·모바일 1열로 화면에 맞춰 갤러리를 배치합니다.
+- 작업을 선택하면 큰 사진과 썸네일 목록이 있는 상세 화면을 엽니다. 화살표·방향키·썸네일·스와이프·드래그로 같은 작업의 사진과 영상을 탐색할 수 있습니다.
+- 메인 영상은 화면에 들어오면 무음으로 반복 재생하고, 화면을 벗어나거나 상세 창을 열면 멈춥니다. 상세 영상은 재생 버튼을 눌러 시작하며, 다른 항목으로 이동하거나 창을 닫으면 재생을 중지합니다.
+- 아래로 스크롤하면 헤더를 숨기고 위로 스크롤하면 다시 보여줍니다. 소개 창과 맨 위로 이동 기능도 제공합니다.
+
+## 미디어와 운영 구성
+
+별도 프레임워크 없이 HTML·CSS·JavaScript로 구현했습니다. 원본 미디어를 보존하면서 크기별 웹용 이미지와 영상 포스터를 준비하고, 반응형 이미지 선택과 지연 로딩으로 필요한 파일을 읽습니다.
+
+사진·영상과 사이트 파일은 비공개 S3 버킷에 보관하고 CloudFront로 제공합니다. GitHub Actions와 AWS OIDC를 연결해 사이트 변경을 자동 배포하며, 방문자가 동의한 경우에만 Google Analytics 이용 통계를 수집합니다.
+
+## 화면 안내
+
+이미지는 Studio Boss 운영 사이트의 메인 갤러리와 사진·영상 상세 화면을 캡처한 것입니다. 영상 이미지는 재생 전 포스터와 재생 버튼이 표시된 상태입니다. 화면의 작업명은 현재 사이트에서 사용하는 임시 명칭입니다.`,
+    thumbnail: {
+      url: "/content/projects/studio-boss/overview.webp",
+      alt: "Studio Boss 로고 아래 반지·인물·가방 사진을 서로 다른 크기로 배치한 메인 갤러리"
+    },
+    screenshots: [
+      {
+        id: "studio-boss-photo-detail",
+        url: "/content/projects/studio-boss/photo-detail.webp",
+        alt: "꽃 옆에 놓인 반지 사진과 이전·다음 화살표, 아래쪽 썸네일 목록을 보여주는 Studio Boss 작업 상세 화면",
+        caption: "큰 사진과 썸네일로 같은 작업의 사진을 탐색하는 상세 화면",
+        sortOrder: 0
+      },
+      {
+        id: "studio-boss-video-detail",
+        url: "/content/projects/studio-boss/video-detail.webp",
+        alt: "주얼리 영상의 포스터 위에 영상 재생 버튼을 표시하고 아래에 사진·영상 썸네일을 배치한 Studio Boss 상세 화면",
+        caption: "포스터와 재생 버튼으로 시작하는 영상 상세 화면",
+        sortOrder: 1
+      }
+    ],
+    githubUrl: null,
+    liveUrl: "https://www.studio-boss.com/",
+    tags: ["포트폴리오", "HTML", "CSS", "JavaScript", "AWS", "S3", "CloudFront"],
+    period: null,
+    publishedAt: "2026-10-30",
+    isSample: false
+  },
   {
     id: "project-portfolio-studies",
     slug: "portfolio-studies",
@@ -152,7 +207,7 @@ Next.js·React·TypeScript로 구현했으며, Jev API는 서버에서 호출합
       {
         id: "jev-playground-traffic",
         url: "/content/projects/jev-playground/traffic.webp",
-        alt: "실행 전 고정 신호와 Jev 제어 교차로, 시나리오 선택과 평균 정차시간 비교 영역을 보여주는 교통 시뮬레이터 화면",
+        alt: "실행 전 고정 신호와 Jev 제어 교차로, 시나리오 선택과 재생 제어를 보여주는 교통 시뮬레이터 화면",
         caption: "같은 차량 유입으로 두 신호 제어 방식을 비교하는 교통 시뮬레이터의 실행 전 화면",
         sortOrder: 3
       }
@@ -478,7 +533,7 @@ JavaScript ES Modules, HTML, 반응형 CSS, SVG 조표와 CSS 기반 피아노 �
 현재 콘텐츠는 저장소의 정적 데이터로 관리하며, 반응형 화면과 라이트·다크 테마를 지원합니다.`,
     thumbnail: {
       url: "/content/projects/ybrary/overview.webp",
-      alt: "프로젝트 검색창과 My Brush·Jev Playground·WorstCompare 카드, 왼쪽 탐색 메뉴를 보여주는 YBrary 프로젝트 목록 화면"
+      alt: "프로젝트 검색창과 태그 필터, Studio Boss·Portfolio Studies·My Brush 카드를 보여주는 YBrary 프로젝트 목록 화면"
     },
     screenshots: [
       {
@@ -491,7 +546,7 @@ JavaScript ES Modules, HTML, 반응형 CSS, SVG 조표와 CSS 기반 피아노 �
       {
         id: "ybrary-projects-dark",
         url: "/content/projects/ybrary/projects-dark.webp",
-        alt: "어두운 배경에서 프로젝트 검색창과 My Brush·Jev Playground·WorstCompare 카드를 보여주는 YBrary 다크 테마 목록 화면",
+        alt: "어두운 배경에서 프로젝트 검색창과 Studio Boss·Portfolio Studies·My Brush 카드를 보여주는 YBrary 다크 테마 목록 화면",
         caption: "다크 테마로 전환한 프로젝트 목록",
         sortOrder: 1
       }
@@ -503,7 +558,13 @@ JavaScript ES Modules, HTML, 반응형 CSS, SVG 조표와 CSS 기반 피아노 �
     publishedAt: "2026-08-06",
     isSample: false,
   },
-]);
+].map((project) => ({
+  ...project,
+  thumbnail: project.thumbnail
+    ? withProjectImageSources(project.thumbnail)
+    : null,
+  screenshots: project.screenshots.map(withProjectImageSources),
+})));
 
 export const reviews = reviewSchema.array().parse([
   {

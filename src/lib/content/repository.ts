@@ -1,6 +1,6 @@
 import { projects, reviews } from "@/lib/content/static-data";
 import { learningNotes } from "@/lib/content/notes";
-import type { ReviewKind } from "@/lib/content/schema";
+import type { ImageAsset, ReviewKind } from "@/lib/content/schema";
 import { normalizeSearchText } from "@/lib/content/search";
 import { contentTags } from "@/lib/content/tags";
 
@@ -11,7 +11,7 @@ export type LatestContent = {
   summary: string;
   href: string;
   publishedAt: string;
-  image: { url: string; alt: string } | null;
+  image: ImageAsset | null;
   isSample: boolean;
   searchText: string;
   tags: string[];

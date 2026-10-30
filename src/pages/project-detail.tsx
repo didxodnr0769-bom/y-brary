@@ -16,6 +16,7 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
             id: `${project.id}-thumbnail`,
             url: project.thumbnail.url,
             alt: project.thumbnail.alt,
+            sources: project.thumbnail.sources,
             caption: "대표 이미지",
           },
         ]
@@ -24,6 +25,7 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
       id: screenshot.id,
       url: screenshot.url,
       alt: screenshot.alt,
+      sources: screenshot.sources,
       caption: screenshot.caption,
     })),
   ];

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { learningNoteSchema, projectSchema, reviewSchema } from "@/lib/content/schema";
+import { imageAssetSchema, learningNoteSchema, projectSchema, reviewSchema } from "@/lib/content/schema";
 import { contentManifestSchema } from "../scripts/content/manifest.ts";
 
 const validReview = {
@@ -17,6 +17,20 @@ const validReview = {
   publishedAt: "2026-08-05",
   isSample: false,
 };
+
+describe("imageAssetSchema", () => {
+  it("기존 이미지와 실제 픽셀 너비를 가진 선택적 후보를 허용한다", () => {
+    const image = { url: "/screen-2880.webp", alt: "프로젝트 화면" };
+    expect(imageAssetSchema.parse(image)).toEqual(image);
+    expect(imageAssetSchema.parse({ ...image, sources: [{ url: "/screen-640.webp", width: 640 }] }).sources)
+      .toEqual([{ url: "/screen-640.webp", width: 640 }]);
+
+    for (const width of [0, -1, 1.5]) {
+      expect(imageAssetSchema.safeParse({ ...image, sources: [{ url: "/screen.webp", width }] }).success).toBe(false);
+    }
+    expect(imageAssetSchema.safeParse({ ...image, sources: [{ url: "screen.webp", width: 640 }] }).success).toBe(false);
+  });
+});
 
 describe("reviewSchema", () => {
   it("책과 강의에 1점부터 5점까지 정수 별점을 허용한다", () => {

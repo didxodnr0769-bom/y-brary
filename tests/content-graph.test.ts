@@ -86,7 +86,7 @@ describe("기록과 주제 그래프", () => {
     ]);
     const categories = graph.nodes.filter((node) => node.kind === "category");
     expect(categories.every((node) => node.x !== selves[0].x && node.y !== selves[0].y)).toBe(true);
-    expect(categories.find((node) => node.id === "category:project")?.degree).toBe(9);
+    expect(categories.find((node) => node.id === "category:project")?.degree).toBe(10);
     expect(categories.find((node) => node.id === "category:book")?.degree).toBe(6);
     expect(categories.find((node) => node.id === "category:course")?.degree).toBe(0);
     expect(categories.find((node) => node.id === "category:note")?.degree).toBe(3);

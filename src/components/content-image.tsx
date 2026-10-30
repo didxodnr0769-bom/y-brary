@@ -1,11 +1,13 @@
 import { useState, type ImgHTMLAttributes } from "react";
 
+import type { ImageSource } from "@/lib/content/schema";
 import { assetUrl } from "@/lib/urls";
 
 type ContentImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "onError" | "src" | "alt"> & {
   alt: string;
   fallbackText?: string;
   src?: string | null;
+  sources?: ImageSource[];
   fill?: boolean;
 };
 
@@ -15,6 +17,8 @@ export function ContentImage({
   alt,
   fallbackText = defaultFallbackText,
   src,
+  sources,
+  srcSet,
   fill,
   style,
   ...imageProps
@@ -32,5 +36,5 @@ export function ContentImage({
     );
   }
 
-  return <img {...imageProps} src={assetUrl(src)} alt={alt} decoding="async" style={fill ? { position: "absolute", inset: 0, width: "100%", height: "100%", ...style } : style} onError={() => setFailedSrc(src)} />;
+  return <img {...imageProps} src={assetUrl(src)} srcSet={sources?.map((source) => `${assetUrl(source.url)} ${source.width}w`).join(", ") || srcSet} alt={alt} decoding="async" style={fill ? { position: "absolute", inset: 0, width: "100%", height: "100%", ...style } : style} onError={() => setFailedSrc(src)} />;
 }

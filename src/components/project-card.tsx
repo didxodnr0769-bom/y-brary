@@ -12,10 +12,11 @@ export function ProjectCard({ eager = false, project }: { eager?: boolean; proje
         <div className="card-media">
           <ContentImage
             src={project.thumbnail?.url}
+            sources={project.thumbnail?.sources}
             alt={project.thumbnail?.alt ?? ""}
             fill
             loading={eager ? "eager" : "lazy"}
-            sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 900px) 46vw, (max-width: 1480px) 31vw, 442px"
           />
         </div>
         <div className="card-body">

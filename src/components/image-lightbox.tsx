@@ -5,13 +5,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { ContentImage } from "@/components/content-image";
 import { ArrowIcon, CloseIcon } from "@/components/ui-icons";
+import type { ImageAsset } from "@/lib/content/schema";
 
 import "swiper/css";
 
-export type LightboxImage = {
+export type LightboxImage = ImageAsset & {
   id: string;
-  url: string;
-  alt: string;
   caption?: string;
 };
 
@@ -19,11 +18,13 @@ export function ImageLightbox({
   images,
   initialIndex,
   label = "이미지 전체 화면 보기",
+  scaleDown = false,
   onClose,
 }: {
   images: LightboxImage[];
   initialIndex: number;
   label?: string;
+  scaleDown?: boolean;
   onClose: () => void;
 }) {
   const [activeIndex, setActiveIndex] = useState(initialIndex);
@@ -78,6 +79,7 @@ export function ImageLightbox({
       className="gallery-lightbox"
       data-state={isClosing ? "closing" : "open"}
       data-single-image={images.length === 1 ? "true" : undefined}
+      data-scale-down={scaleDown ? "true" : undefined}
       aria-label={label}
       onCancel={(event) => {
         event.preventDefault();
@@ -131,7 +133,7 @@ export function ImageLightbox({
           {images.map((item) => (
             <SwiperSlide key={item.id}>
               <div className="gallery-lightbox-image">
-                <ContentImage src={item.url} alt={item.alt} fill sizes="100vw" draggable={false} />
+                <ContentImage src={item.url} sources={item.sources} alt={item.alt} fill sizes="100vw" draggable={false} />
               </div>
             </SwiperSlide>
           ))}

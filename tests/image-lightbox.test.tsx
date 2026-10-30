@@ -35,7 +35,7 @@ describe("ImageLightbox", () => {
   it("클릭한 이미지의 위치와 설명으로 확대 화면을 연다", () => {
     render(<ImageLightbox images={images} initialIndex={1} onClose={vi.fn()} />);
 
-    expect(screen.getByRole("dialog", { name: "이미지 전체 화면 보기" })).toBeTruthy();
+    expect(screen.getByRole("dialog", { name: "이미지 전체 화면 보기" }).getAttribute("data-scale-down")).toBeNull();
     expect(screen.getByText(/02\s*\/\s*03/)).toBeTruthy();
     expect(screen.getByText("두 번째 설명")).toBeTruthy();
     expect(screen.getByRole("button", { name: "이전 이미지" })).toBeTruthy();

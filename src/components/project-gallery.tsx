@@ -21,7 +21,7 @@ export function ProjectGallery({ images }: { images: ProjectGalleryImage[] }) {
     return (
       <section className="project-gallery-section" aria-label="프로젝트 이미지">
         <div className="project-gallery">
-          <ContentImage src={null} alt="" fill sizes="(max-width: 900px) 100vw, 1400px" />
+          <ContentImage src={null} alt="" fill sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 1400px) 92vw, (max-width: 1480px) calc(100vw - 112px), 1368px" />
         </div>
       </section>
     );
@@ -60,10 +60,11 @@ export function ProjectGallery({ images }: { images: ProjectGalleryImage[] }) {
                 >
                   <ContentImage
                     src={image.url}
+                    sources={image.sources}
                     alt={image.alt}
                     fill
                     loading={index === 0 ? "eager" : "lazy"}
-                    sizes="(max-width: 900px) 100vw, 1400px"
+                    sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 1400px) 92vw, (max-width: 1480px) calc(100vw - 112px), 1368px"
                   />
                   {image.caption ? (
                     <span className="gallery-slide-caption">{image.caption}</span>
@@ -116,6 +117,7 @@ export function ProjectGallery({ images }: { images: ProjectGalleryImage[] }) {
         <ImageLightbox
           images={images}
           initialIndex={activeIndex}
+          scaleDown
           label="프로젝트 이미지 전체 화면 보기"
           onClose={() => setActiveIndex(null)}
         />
