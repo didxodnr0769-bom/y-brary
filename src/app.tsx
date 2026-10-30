@@ -34,12 +34,21 @@ function PageMetadata() {
       : collection === "courses" ? getReviewBySlug("course", slug)
       : collection === "notes" ? getLearningNoteBySlug(slug) : null;
     document.title = `${titles[path] ?? record?.title ?? "기록을 찾을 수 없음"} | YBrary`;
+    const shareTitle = path === "/" ? "YBrary | 프로젝트와 배움의 기록" : document.title;
+    const shareDescription = record?.summary ?? "프로젝트와 책, 강의 기록, 노트를 모은 개인 아카이브 YBrary입니다.";
     const description = document.querySelector('meta[name="description"]');
-    description?.setAttribute("content", record?.summary ?? "프로젝트와 책, 강의 기록, 노트를 모은 개인 아카이브 YBrary입니다.");
+    description?.setAttribute("content", shareDescription);
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]') ?? document.createElement("link");
     canonical.rel = "canonical";
-    canonical.href = new URL(assetUrl(path), import.meta.env.VITE_SITE_URL || window.location.origin).href;
+    canonical.href = new URL(assetUrl(path === "/" ? path : `${path}/`), import.meta.env.VITE_SITE_URL || window.location.origin).href;
     if (!canonical.parentNode) document.head.append(canonical);
+    for (const [selector, value] of [
+      ['meta[property="og:title"]', shareTitle],
+      ['meta[property="og:description"]', shareDescription],
+      ['meta[property="og:url"]', canonical.href],
+      ['meta[name="twitter:title"]', shareTitle],
+      ['meta[name="twitter:description"]', shareDescription],
+    ]) document.querySelector(selector)?.setAttribute("content", value);
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
